@@ -1,0 +1,123 @@
+﻿/*
+ * IBAN4Net
+ * Copyright 2015 Vaclav Beca [sinkien]
+ *
+ * Based on Artur Mkrtchyan's project IBAN4j (https://github.com/arturmkrtchyan/iban4j).
+ *
+ *
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace sinkien.IBAN4Net.Tests
+{
+    [TestClass]
+    public class BicTest
+    {
+        [TestMethod, ExpectedException(typeof(UnsupportedCountryException))]
+        public void BicInstanceCreationWithInvalidCountryCodeShouldThrowException ()
+        {
+            Bic testBic = Bic.CreateInstance( "DEUTAAFF500" );
+        }
+
+        [TestMethod]
+        public void BicWithSameDataShouldBeEqual()
+        {
+            Bic bic1 = Bic.CreateInstance( "DEUTDEFF500" );
+            Bic bic2 = Bic.CreateInstance( "DEUTDEFF500" );
+
+            Assert.AreEqual( bic1, bic2 );
+        }
+
+        [TestMethod]
+        public void BicWithDifferentDataShouldNotBeEqual()
+        {
+            Bic bic1 = Bic.CreateInstance( "DEUTDEFF500" );
+            Bic bic2 = Bic.CreateInstance( "DEUTDEFF501" );
+
+            Assert.AreNotEqual( bic1, bic2 );
+        }
+
+        [TestMethod]
+        public void BicWithStringValueAndBicShouldNotBeEqual()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+
+            Assert.AreNotEqual( bic, "DEUTDEFF500" );
+        }
+
+        [TestMethod]
+        public void BicsWithSameDataShouldHaveSameHashCode()
+        {
+            Bic bic1 = Bic.CreateInstance( "DEUTDEFF500" );
+            Bic bic2 = Bic.CreateInstance( "DEUTDEFF500" );
+
+            Assert.AreEqual( bic1.GetHashCode(), bic2.GetHashCode() );
+        }
+
+        [TestMethod]
+        public void BicsWithDifferentDataShouldHaveDifferentHashCodes()
+        {
+            Bic bic1 = Bic.CreateInstance( "DEUTDEFF500" );
+            Bic bic2 = Bic.CreateInstance( "DEUTDEFF501" );
+
+            Assert.AreNotEqual( bic1.GetHashCode(), bic2.GetHashCode() );
+        }
+
+        [TestMethod]
+        public void BicShouldReturnBankCode()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+            Assert.AreEqual( bic.BankCode, "DEUT" );
+        }
+
+        [TestMethod]
+        public void BicShouldReturnCountryCode()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+
+            Assert.AreEqual( bic.GetCountryCode().Alpha2, "DE" );
+        }
+
+        [TestMethod]
+        public void BicShouldReturnBranchCode()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+            Assert.AreEqual( bic.GetBranchCode(), "500" );
+        }
+
+        [TestMethod]
+        public void BicWithoutBranchCodeShoulRetunEmpty()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF" );
+            Assert.AreEqual( bic.GetBranchCode(), string.Empty );
+        }
+
+        [TestMethod]
+        public void BicShouldReturnLocationCode()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+            Assert.AreEqual( bic.LocationCode, "FF" );
+        }
+
+        [TestMethod]
+        public void BicToStringShoulReturnString()
+        {
+            Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
+            Assert.AreEqual( bic.ToString(), "DEUTDEFF500" );
+        }
+    }
+}

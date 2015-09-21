@@ -1,0 +1,418 @@
+﻿/*
+ * IBAN4Net
+ * Copyright 2015 Vaclav Beca [sinkien]
+ *
+ * Based on Artur Mkrtchyan's project IBAN4j (https://github.com/arturmkrtchyan/iban4j).
+ *
+ *
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+using System;
+
+namespace sinkien.IBAN4Net
+{
+    /// <summary>
+    /// IBAN Utilities
+    /// </summary>
+    public static class IbanUtils
+    {
+        private const int _MOD = 97;
+        private const long _MAX = 999999999;
+
+        private const int _COUNTRY_CODE_INDEX = 0;
+        private const int _COUNTRY_CODE_LENGTH = 2;
+        private const int _CHECK_DIGIT_INDEX = _COUNTRY_CODE_LENGTH;
+        private const int _CHECK_DIGIT_LENGTH = 2;
+        private const int _BBAN_INDEX = _CHECK_DIGIT_INDEX + _CHECK_DIGIT_LENGTH;
+
+        /// <summary>
+        /// Validation of IBAN string
+        /// </summary>
+        /// <param name="iban">IBAN string</param>
+        /// <exception cref="IbanFormatException">Thrown when IBAN is invalid</exception>
+        /// <exception cref="UnsupportedCountryException">Thrown when INAB's country code is not supported</exception>
+        /// <exception cref="InvalidCheckDigitException">Thrown when IBAN string contains invalid check digit</exception>
+        public static void Validate(string iban)
+        {
+            try
+            {
+                validateEmpty( iban );
+                validateCountryCode( iban );
+                validateCheckDigitPresence( iban );
+
+                BBanStructure structure = getBbanStructure( iban );
+                validateBbanLength( iban, structure );
+                validateBbanEntries( iban, structure );
+
+                validateCheckDigit( iban );
+            }            
+            catch (InvalidCheckDigitException icex)
+            {
+                throw icex;
+            }
+            catch (IbanFormatException iex)
+            {
+                throw iex;
+            }
+            catch (UnsupportedCountryException ucex)
+            {
+                throw ucex;
+            }
+            catch (Exception ex)
+            {
+                throw new IbanFormatException( ex.Message, IbanFormatViolation.UNKNOWN, ex );
+            }
+        }
+
+        /// <summary>
+        /// Checks whether country is supported.
+        /// It is checked by trying to find the country code in defined BBAN structures.
+        /// </summary>
+        /// <param name="countryCode">Country code object</param>
+        /// <returns>True if country code is supported, othewise false</returns>
+        public static bool IsSupportedCountry (CountryCodeEntry countryCode) => Bban.GetStructureForCountry( countryCode ) != null;
+
+        /// <summary>
+        /// Checks whether country is supported.
+        /// It is checked by trying to find the country code in defined BBAN structures.
+        /// </summary>
+        /// <param name="alpha2Code">Alpha2 code for country</param>
+        /// <returns>True if country code is supported, othewise false</returns>
+        public static bool IsSupportedCountry (string alpha2Code) => Bban.GetStructureForCountry( alpha2Code ) != null;
+
+        /// <summary>
+        /// Returns IBAN length for the specified country
+        /// </summary>
+        /// <param name="countryCode">Country code object</param>
+        /// <returns>The length of IBAN for the specified country</returns>
+        public static int GetIbanLength (CountryCodeEntry countryCode)
+        {
+            int result = 0;
+            BBanStructure structure = getBbanStructure( countryCode );
+
+            if (structure != null)
+            {
+                result = _COUNTRY_CODE_LENGTH + _CHECK_DIGIT_LENGTH + structure.GetBBanLength();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates IBAN's check digit.
+        /// ISO13616
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>Check digit as string</returns>
+        /// <exception cref="IbanFormatException">Thrown if supplied iban string contains invalid chracters</exception>
+        public static string CalculateCheckDigit (string iban)
+        {
+            string reformattedIban = ReplaceCheckDigit( iban, Iban.DEFAULT_CHECK_DIGIT );
+            int modResult = calculateMod( reformattedIban );
+            int checkDigitValue = ( 98 - modResult );
+            string checkDigit = checkDigitValue.ToString();
+
+            return checkDigitValue > 9 ? checkDigit : "0" + checkDigit;
+        }
+
+        /// <summary>
+        /// Calculates IBAN's check digit.
+        /// ISO13616
+        /// </summary>
+        /// <param name="iban">IBAN object</param>
+        /// <returns>Check digit as string</returns>
+        /// <exception cref="IbanFormatException">Thrown if supplied iban string contains invalid chracters</exception>
+        public static string CalculateCheckDigit (Iban iban) => CalculateCheckDigit( iban.ToString() );
+
+        /// <summary>
+        /// Returns IBAN's check digit
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>Check digit string</returns>
+        public static string GetCheckDigit (string iban) => iban.Substring( _CHECK_DIGIT_INDEX, _CHECK_DIGIT_LENGTH );
+
+
+        /// <summary>
+        /// Returns IBAN's country code
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>IBAN's country code string</returns>
+        public static string GetCountryCode (string iban) => iban.Substring( _COUNTRY_CODE_INDEX, _COUNTRY_CODE_LENGTH );
+
+        /// <summary>
+        /// Returns IBAN'S country code and check digit
+        /// </summary>
+        /// <param name="iban">IBAN string vlaue</param>
+        /// <returns>IBAN's country code and check digit string</returns>
+        public static string GetCountryCodeAndCheckDigit (string iban) => iban.Substring( _COUNTRY_CODE_INDEX, _COUNTRY_CODE_LENGTH + _CHECK_DIGIT_LENGTH );
+
+        /// <summary>
+        /// Returns IBAN's BBAN code 
+        /// (all what is left without country code and check digit).
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>BBAN string</returns>
+        public static string GetBBan (string iban) => iban.Substring( _BBAN_INDEX );
+
+        /// <summary>
+        /// Returns IBAN's account number
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>IBAN's account number as string</returns>
+        public static string GetAccountNumber (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_NUMBER );
+
+        /// <summary>
+        /// Returns IBAN'S bank code
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>IBAN's bank code</returns>
+        public static string GetBankCode (string iban) => extractBbanEntry( iban, BBanEntryType.BANK_CODE );
+
+        /// <summary>
+        /// Returns IBAN's branch code
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>IBAN's branch code string</returns>
+        public static string GetBranchCode (string iban) => extractBbanEntry( iban, BBanEntryType.BRANCH_CODE );
+
+        /// <summary>
+        /// Returns IBAN's national check digit
+        /// </summary>
+        /// <param name="iban">Iban value string</param>
+        /// <returns>IBAN's national check digit string</returns>
+        public static string GetNationalCheckDigit (string iban) => extractBbanEntry( iban, BBanEntryType.NATIONAL_CHECK_DIGIT );
+
+        /// <summary>
+        /// Returns IBAN's account type
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>IBAN's account type string</returns>
+        public static string GetAccountType (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_TYPE );
+
+        /// <summary>
+        /// Returns IBAN'S owner account type
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>IBAN's owner account type string</returns>
+        public static string GetOwnerAccountType (string iban) => extractBbanEntry( iban, BBanEntryType.OWNER_ACCOUNT_NUMBER );
+
+        /// <summary>
+        /// Returns IBAN's identification number
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <returns>IBAN's identifcation number string</returns>
+        public static string GetIdentificationNumber (string iban) => extractBbanEntry( iban, BBanEntryType.IDENTIFICATION_NUMBER );
+
+        
+
+        /// <summary>
+        /// Returns an iban with replaced check digit
+        /// </summary>
+        /// <param name="iban">Iban string value</param>
+        /// <param name="checkDigit">A check digit which will be placed to IBAN string</param>
+        /// <returns>IBAN string with replaced check digit</returns>
+        public static string ReplaceCheckDigit (string iban, string checkDigit) => GetCountryCode( iban ) + checkDigit + GetBBan( iban );
+
+        
+
+        private static void validateCheckDigit(string iban)
+        {
+            if (calculateMod(iban) != 1)
+            {
+                string checkDigit = GetCheckDigit( iban );
+                string expectedCheckDigit = CalculateCheckDigit( iban );
+
+                throw new InvalidCheckDigitException( $"{iban} has invalid check digit {checkDigit}. Expected check digit is {expectedCheckDigit}", expectedCheckDigit, checkDigit );
+            }
+        }
+
+        private static void validateEmpty (string iban)
+        {
+            if (string.IsNullOrEmpty(iban))
+            {
+                throw new IbanFormatException( "Empty or null input cannot be a valid IBAN", IbanFormatViolation.IBAN_NOT_EMPTY_OR_NULL );
+            }
+        }
+
+        private static void validateCountryCode (string iban)
+        {
+            if (iban.Length < _COUNTRY_CODE_LENGTH)
+            {
+                throw new IbanFormatException( "Input must contain 2 letters for country code", IbanFormatViolation.COUNTRY_CODE_TWO_LETTERS, iban );
+            }
+
+            string countryCode = GetCountryCode( iban );
+
+            if (!countryCode.Equals( countryCode.ToUpper() ) || !char.IsLetter( iban[0] ) || !char.IsLetter( iban[1] ))
+            {
+                throw new IbanFormatException( "IBAN's country code must contain upper case letters", IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS, iban );
+            }
+
+            CountryCodeEntry countryEntry = CountryCode.GetCountryCode( countryCode );
+
+            if (countryEntry == null)
+            {
+                throw new IbanFormatException( "IBAN contains non existing country code", IbanFormatViolation.COUNTRY_CODE_EXISTS, iban );
+            }
+
+            BBanStructure structure = Bban.GetStructureForCountry( countryEntry );
+            if (structure == null)
+            {
+                throw new UnsupportedCountryException( "IBAN contains not supported country code", countryCode );
+            }
+
+        }
+
+        private static void validateCheckDigitPresence(string iban)
+        {
+            if (iban.Length < (_COUNTRY_CODE_LENGTH + _CHECK_DIGIT_LENGTH) )
+            {
+                throw new IbanFormatException( "IBAN must contain 2 digit check digit", IbanFormatViolation.CHECK_DIGIT_TWO_DIGITS, iban.Substring( _COUNTRY_CODE_LENGTH ) );
+            }
+
+            string checkDigit = GetCheckDigit( iban );
+            if (!char.IsDigit(checkDigit[0]) || !char.IsDigit(checkDigit[1]))
+            {
+                throw new IbanFormatException( "IBAN's check digit should contain only digits", IbanFormatViolation.CHECK_DIGIT_ONLY_DIGITS, checkDigit );
+            }
+        }
+
+        private static void validateBbanLength(string iban, BBanStructure structure)
+        {
+            int expectedBbanLength = structure.GetBBanLength();
+            string bban = GetBBan( iban );
+            int bbanLength = bban.Length;
+
+            if (expectedBbanLength != bbanLength)
+            {
+                throw new IbanFormatException( $"BBAN '{bban}' length is {bbanLength}, expected is {expectedBbanLength}", 
+                                               IbanFormatViolation.BBAN_LENGTH, bbanLength, expectedBbanLength );
+            }
+        }
+
+        private static void validateBbanEntries(string iban, BBanStructure structue)
+        {
+            string bban = GetBBan( iban );
+            int bbanOffset = 0;
+
+            foreach (BBanEntry entry in structue.Entries)
+            {
+                int entryLength = entry.Length;
+                string entryValue = bban.Substring( bbanOffset, entryLength );
+
+                bbanOffset += entryLength;
+
+                validateBbanEntryCharacterType( entry, entryValue );
+            }         
+        }
+
+        private static void validateBbanEntryCharacterType (BBanEntry entry, string entryValue)
+        {
+            switch (entry.CharacterType)
+            {
+                case BBanEntryCharacterType.A:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsUpper(c))
+                        {
+                            throw new IbanFormatException( $"'{entryValue}' must contain only upper case letters", 
+                                                           IbanFormatViolation.BBAN_ONLY_UPPER_CASE_LETTERS, c, entry.EntryType, entryValue );
+                        }
+                    }
+                    break;
+                case BBanEntryCharacterType.C:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsLetterOrDigit(c))
+                        {
+                            throw new IbanFormatException( $"'{entryValue}' must contain only letters or digits", 
+                                                           IbanFormatViolation.BBAN_ONLY_DIGITS_OR_LETTERS, c, entry.EntryType, entryValue );
+                        }
+                    }
+                    break;
+                case BBanEntryCharacterType.N:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsDigit(c))
+                        {
+                            throw new IbanFormatException( $"'{entryValue}' must contain only digits", 
+                                                           IbanFormatViolation.BBAN_ONLY_DIGITS, c, entry.EntryType, entryValue );
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private static int calculateMod (string iban)
+        {
+            string reformattedIban = GetBBan( iban ) + GetCountryCodeAndCheckDigit( iban );
+            double total = 0;
+
+            // a little java's workaround ;)
+            char[] letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+            for (int i = 0; i < reformattedIban.Length; i++)
+            {
+                double numericValue = char.IsLetter( reformattedIban[i]) ? ( 10 + Array.IndexOf( letters, reformattedIban[i] ) ) : char.GetNumericValue( reformattedIban[i] );
+                if (numericValue < 0 || numericValue > 35)
+                {
+                    throw new IbanFormatException( $"Invalid character on position {i} = {numericValue}", IbanFormatViolation.IBAN_VALID_CHARACTERS, reformattedIban[i] );
+                }
+
+                total = ( numericValue > 9 ? total * 100 : total * 10 ) + numericValue;
+
+                if (total > _MAX)
+                {
+                    total = ( total % _MOD );
+                }
+            }
+
+            return (int)( total % _MOD );
+        }        
+
+        private static BBanStructure getBbanStructure (string iban)
+        {
+            string countryCode = GetCountryCode( iban );
+            return getBbanStructure( CountryCode.GetCountryCode( countryCode ) );
+        }
+
+        private static BBanStructure getBbanStructure (CountryCodeEntry countryCode) => Bban.GetStructureForCountry( countryCode );
+
+        private static string extractBbanEntry (string iban, BBanEntryType entryType)
+        {
+            string result = "";
+
+            string bban = GetBBan( iban );
+            BBanStructure structure = getBbanStructure( iban );
+            int bbanOffset = 0;
+
+            foreach (BBanEntry entry in structure.Entries)
+            {
+                int entryLength = entry.Length;
+                string entryValue = bban.Substring( bbanOffset, entryLength );
+
+                bbanOffset += entryLength;
+
+                if (entry.EntryType == entryType)
+                {
+                    result = entryValue;
+                    break;
+                }
+            }
+
+            return result;
+        }
+    }
+}
