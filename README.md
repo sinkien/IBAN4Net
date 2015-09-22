@@ -17,6 +17,9 @@ Some of the differencies from the java project are:
 - Iban Builder verifies lengths of some of the parts during formatting and can left-pad them with zeroes if they are shorter than BBAN rule specifies (see examples).
 
 
+<b>You can get this library directly to your project from NuGet: <a href="https://www.nuget.org/packages/IBAN4Net/">https://www.nuget.org/packages/IBAN4Net/</a></b>
+
+
 ### Quick examples of usage:
 
 #### IBANs:
