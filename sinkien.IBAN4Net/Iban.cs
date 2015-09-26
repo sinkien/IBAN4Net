@@ -48,7 +48,7 @@ namespace sinkien.IBAN4Net
         {
             IbanUtils.Validate( iban );
             return new Iban( iban );
-        }
+        }        
 
         public CountryCodeEntry GetCountryCode() => CountryCode.GetCountryCode( IbanUtils.GetCountryCode( Value ) );
 

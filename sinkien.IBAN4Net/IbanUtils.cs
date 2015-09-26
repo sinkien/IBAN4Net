@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace sinkien.IBAN4Net
 {
@@ -174,11 +175,32 @@ namespace sinkien.IBAN4Net
         public static string GetAccountNumber (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_NUMBER );
 
         /// <summary>
+        /// Returns a new IBAN string with changed account number
+        /// Automatically adds zeros to the beginning in order to maintain the length specified by the BBAN rule
+        /// </summary>
+        /// <param name="iban">Original IBAN</param>
+        /// <param name="newAccountNumber">The new account number</param>
+        /// <returns>IBAN with changed account number and recalculated check digit</returns>
+        /// <exception cref="IbanFormatException">Thrown when new account number is longer, than that is specified in BBAN rules</exception>
+        public static string ChangeAccountNumber (string iban, string newAccountNumber) => changeBbanEntry( iban, newAccountNumber, BBanEntryType.ACCOUNT_NUMBER );
+        
+
+        /// <summary>
         /// Returns IBAN'S bank code
         /// </summary>
         /// <param name="iban">Iban string value</param>
         /// <returns>IBAN's bank code</returns>
         public static string GetBankCode (string iban) => extractBbanEntry( iban, BBanEntryType.BANK_CODE );
+
+        /// <summary>
+        /// Return a new IBAN string with changed bank code
+        /// Automatically adds zeros to the beginning in order to maintain the length specified by the BBAN rule
+        /// </summary>
+        /// <param name="iban">Original IBAN</param>
+        /// <param name="newBankCode">The new bank code</param>
+        /// <returns>IBAN with changed bank code and recalculated check digit</returns>
+        /// <exception cref="IbanFormatException">Thrown when new bank code is longer, than that is specified in BBAN rules</exception>
+        public static string ChangeBankCode (string iban, string newBankCode) => changeBbanEntry( iban, newBankCode, BBanEntryType.BANK_CODE );
 
         /// <summary>
         /// Returns IBAN's branch code
@@ -413,6 +435,44 @@ namespace sinkien.IBAN4Net
             }
 
             return result;
+        }
+
+        private static string changeBbanEntry(string iban, string newValue, BBanEntryType entryType)
+        {
+            
+            string bban = GetBBan( iban );
+            string newIban = GetCountryCode( iban ) + Iban.DEFAULT_CHECK_DIGIT;
+
+            BBanStructure structure = getBbanStructure( iban );
+            int bbanOffset = 0;
+            StringBuilder sb = new StringBuilder( bban );
+
+            foreach (BBanEntry entry in structure.Entries)
+            {                
+                if (entry.EntryType == entryType)
+                {
+
+                    if (newValue.Length > entry.Length)
+                    {
+                        throw new IbanFormatException( $"New value for {Enum.GetName( typeof( BBanEntryType ), entry.EntryType )} is too long.", IbanFormatViolation.BBAN_ENTRY_TOO_LONG );
+                    }
+
+                    sb.Remove( bbanOffset, entry.Length );
+                    sb.Insert( bbanOffset, newValue.PadLeft( entry.Length, '0' ) );
+                    break;
+                }
+
+                bbanOffset += entry.Length;
+            }
+
+            sb.Insert( 0, newIban );
+            newIban = sb.ToString();
+
+            string newCheckDigit = CalculateCheckDigit( newIban );
+            string result = ReplaceCheckDigit( newIban, newCheckDigit );
+
+            return result;
+            
         }
     }
 }

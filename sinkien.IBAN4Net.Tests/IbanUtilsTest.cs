@@ -294,5 +294,70 @@ namespace sinkien.IBAN4Net.Tests
             string testIban = "CZ6508000000192000145399";
             Assert.AreEqual( IbanUtils.GetBBan( testIban ), "08000000192000145399" );
         }
+
+        [TestMethod]
+        public void IbanUtilChangeAccountNumber ()
+        {
+            string iban = "CZ6508000000999999999999";
+            string changed = IbanUtils.ChangeAccountNumber( iban, "0000192000145399" );
+
+            Assert.AreEqual( "CZ6508000000192000145399", changed );
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeAccountNumberShouldPadItself()
+        {
+            string iban = "CZ6508000000999999999999";
+            string changed = IbanUtils.ChangeAccountNumber( iban, "192000145399" );
+
+            Assert.AreEqual( "CZ6508000000192000145399", changed );
+        }
+
+
+        [TestMethod]
+        public void IbanUtilChangeAccountNumberWithTooLongNumberShouldThrowException()
+        {
+            try
+            {
+                string iban = "CZ6508000000999999999999";
+                string changed = IbanUtils.ChangeAccountNumber( iban, "0000192000145399123" );
+            }
+            catch (IbanFormatException iex)
+            {
+                Assert.AreEqual( IbanFormatViolation.BBAN_ENTRY_TOO_LONG, iex.FormatViolation );
+            }
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeBankCode()
+        {
+            string iban = "CZ6511110000192000145399";
+            string changed = IbanUtils.ChangeBankCode( iban, "0800" );
+
+            Assert.AreEqual( "CZ6508000000192000145399", changed );
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeBankCodeShouldPadItself()
+        {
+            string iban = "CZ6511110000192000145399";
+            string changed = IbanUtils.ChangeBankCode( iban, "800" );
+
+            Assert.AreEqual( "CZ6508000000192000145399", changed );
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeBankCodeWithTooLongCodeShouldThrowException()
+        {
+            try
+            {
+                string iban = "CZ6511110000192000145399";
+                string changed = IbanUtils.ChangeBankCode( iban, "11111" );
+            }
+            catch (IbanFormatException iex)
+            {
+                Assert.AreEqual( IbanFormatViolation.BBAN_ENTRY_TOO_LONG, iex.FormatViolation );
+            }
+        }
     }
 }
