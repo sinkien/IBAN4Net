@@ -50,6 +50,7 @@ namespace sinkien.IBAN4Net
     /// </summary>
     public enum BicFormatViolation
     {
+        NO_VIOLATION,
         UNKNOWN,
         BIC_NOT_EMPTY_OR_NULL,        
         BIC_LENGTH_8_OR_11,
@@ -57,7 +58,8 @@ namespace sinkien.IBAN4Net
         BRANCH_CODE_ONLY_LETTERS_OR_DIGITS,
         LOCATION_CODE_ONLY_LETTERS_OR_DIGITS,
         BANK_CODE_ONLY_LETTERS,
-        COUNTRY_CODE_ONLY_UPPER_CASE_LETTERS
+        COUNTRY_CODE_ONLY_UPPER_CASE_LETTERS,
+        COUNTRY_CODE_UNSUPPORTED
     }
 
     /// <summary>
@@ -65,15 +67,18 @@ namespace sinkien.IBAN4Net
     /// </summary>
     public enum IbanFormatViolation
     {
+        NO_VIOLATION,
         UNKNOWN,
         IBAN_NOT_EMPTY_OR_NULL,
         IBAN_VALID_CHARACTERS,
+        IBAN_INVALID_CHECK_DIGIT_VALUE,
         CHECK_DIGIT_ONLY_DIGITS,
         CHECK_DIGIT_TWO_DIGITS,
         COUNTRY_CODE_TWO_LETTERS,
         COUNTRY_CODE_UPPER_CASE_LETTERS,
         COUNTRY_CODE_EXISTS,
         COUNTRY_CODE_NOT_NULL,
+        COUNTRY_CODE_UNSUPPORTED,
         BBAN_LENGTH,
         BBAN_ONLY_DIGITS,
         BBAN_ONLY_UPPER_CASE_LETTERS,
@@ -83,5 +88,5 @@ namespace sinkien.IBAN4Net
         BANK_CODE_TOO_LONG,
         ACCOUNT_NUMBER_NOT_NULL,
         ACCOUNT_NUMBER_TOO_LONG
-    }
+    }    
 }

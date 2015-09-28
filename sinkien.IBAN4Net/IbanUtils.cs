@@ -78,6 +78,45 @@ namespace sinkien.IBAN4Net
         }
 
         /// <summary>
+        /// Validation of IBAN string
+        /// </summary>
+        /// <param name="iban">Iban string</param>
+        /// <param name="validationResult">Validation result</param>
+        /// <returns>True if IBAN string is valid, false if it encounters any problem</returns>
+        public static bool IsValid(string iban, out IbanFormatViolation validationResult)
+        {
+            bool result = false;
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            if (!string.IsNullOrEmpty(iban))
+            {
+                if (hasValidCountryCode(iban, out validationResult))
+                {
+                    if (hasValidCheckDigit( iban, out validationResult))
+                    {
+                        BBanStructure structure = getBbanStructure( iban );
+                        if (hasValidBbanLength(iban, structure, out validationResult))
+                        {
+                            if (hasValidBbanEntries(iban, structure, out validationResult))
+                            {
+                                if (hasValidCheckDigitValue(iban, out validationResult))
+                                {
+                                    result = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                validationResult = IbanFormatViolation.IBAN_NOT_EMPTY_OR_NULL;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Checks whether country is supported.
         /// It is checked by trying to find the country code in defined BBAN structures.
         /// </summary>
@@ -260,6 +299,18 @@ namespace sinkien.IBAN4Net
             }
         }
 
+        private static bool hasValidCheckDigitValue(string iban, out IbanFormatViolation validationResult)
+        {
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            if (calculateMod( iban ) != 1)
+            {
+                validationResult = IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE;
+            }
+
+            return ( validationResult == IbanFormatViolation.NO_VIOLATION );
+        }
+
         private static void validateEmpty (string iban)
         {
             if (string.IsNullOrEmpty(iban))
@@ -294,7 +345,42 @@ namespace sinkien.IBAN4Net
             {
                 throw new UnsupportedCountryException( "IBAN contains not supported country code", countryCode );
             }
+        }
 
+        private static bool hasValidCountryCode(string iban, out IbanFormatViolation validationResult)
+        {            
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            if (iban.Length < _COUNTRY_CODE_LENGTH)
+            {
+                validationResult = IbanFormatViolation.COUNTRY_CODE_TWO_LETTERS;
+            }
+            else
+            {
+                string countryCode = GetCountryCode( iban );
+                if (!countryCode.Equals( countryCode.ToUpper() ) || !char.IsLetter( iban[0] ) || !char.IsLetter( iban[1] ))
+                {
+                    validationResult = IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS;
+                }
+                else
+                {
+                    CountryCodeEntry countryEntry = CountryCode.GetCountryCode( countryCode );
+                    if (countryEntry == null)
+                    {
+                        validationResult = IbanFormatViolation.COUNTRY_CODE_EXISTS;
+                    }
+                    else
+                    {
+                        BBanStructure structure = Bban.GetStructureForCountry( countryEntry );
+                        if (structure == null)
+                        {
+                            validationResult = IbanFormatViolation.COUNTRY_CODE_UNSUPPORTED;
+                        }         
+                    }
+                }
+            }
+
+            return ( validationResult == IbanFormatViolation.NO_VIOLATION );
         }
 
         private static void validateCheckDigitPresence(string iban)
@@ -311,6 +397,26 @@ namespace sinkien.IBAN4Net
             }
         }
 
+        private static bool hasValidCheckDigit(string iban, out IbanFormatViolation validationResult)
+        {
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+            
+            if ((iban.Length < ( _COUNTRY_CODE_LENGTH + _CHECK_DIGIT_LENGTH )))
+            {
+                validationResult = IbanFormatViolation.CHECK_DIGIT_TWO_DIGITS;                
+            }
+            else
+            {
+                string checkDigit = GetCheckDigit( iban );
+                if (!char.IsDigit( checkDigit[0] ) || !char.IsDigit( checkDigit[1] ))
+                {
+                    validationResult = IbanFormatViolation.CHECK_DIGIT_ONLY_DIGITS;
+                }            
+            }
+
+            return (validationResult == IbanFormatViolation.NO_VIOLATION);
+        }
+
         private static void validateBbanLength(string iban, BBanStructure structure)
         {
             int expectedBbanLength = structure.GetBBanLength();
@@ -324,12 +430,28 @@ namespace sinkien.IBAN4Net
             }
         }
 
-        private static void validateBbanEntries(string iban, BBanStructure structue)
+        private static bool hasValidBbanLength(string iban, BBanStructure structure, out IbanFormatViolation validationResult)
+        {            
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            int expectedBbanLength = structure.GetBBanLength();
+            string bban = GetBBan( iban );
+            int bbanLength = bban.Length;
+
+            if (expectedBbanLength != bbanLength)
+            {
+                validationResult = IbanFormatViolation.BBAN_LENGTH;
+            }
+
+            return ( validationResult == IbanFormatViolation.NO_VIOLATION );
+        }
+
+        private static void validateBbanEntries(string iban, BBanStructure structure)
         {
             string bban = GetBBan( iban );
             int bbanOffset = 0;
 
-            foreach (BBanEntry entry in structue.Entries)
+            foreach (BBanEntry entry in structure.Entries)
             {
                 int entryLength = entry.Length;
                 string entryValue = bban.Substring( bbanOffset, entryLength );
@@ -338,6 +460,29 @@ namespace sinkien.IBAN4Net
 
                 validateBbanEntryCharacterType( entry, entryValue );
             }         
+        }
+
+        private static bool hasValidBbanEntries(string iban, BBanStructure structure, out IbanFormatViolation validationResult)
+        {            
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            string bban = GetBBan( iban );
+            int bbanOffset = 0;
+
+            foreach (BBanEntry entry in structure.Entries)
+            {
+                int entryLength = entry.Length;
+                string entryValue = bban.Substring( bbanOffset, entryLength );
+
+                bbanOffset += entryLength;
+                
+                if (!hasValidBbanEntryCharacterType(entry, entryValue, out validationResult))
+                {             
+                    break;
+                }
+            }
+
+            return ( validationResult == IbanFormatViolation.NO_VIOLATION );
         }
 
         private static void validateBbanEntryCharacterType (BBanEntry entry, string entryValue)
@@ -375,6 +520,47 @@ namespace sinkien.IBAN4Net
                     }
                     break;
             }
+        }
+
+        private static bool hasValidBbanEntryCharacterType (BBanEntry entry, string entryValue, out IbanFormatViolation validationResult)
+        {            
+            validationResult = IbanFormatViolation.NO_VIOLATION;
+
+            switch (entry.CharacterType)
+            {
+                case BBanEntryCharacterType.A:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsUpper( c ))
+                        {
+                            validationResult = IbanFormatViolation.BBAN_ONLY_UPPER_CASE_LETTERS;
+                            break;                            
+                        }
+                    }
+                    break;
+                case BBanEntryCharacterType.C:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsLetterOrDigit( c ))
+                        {
+                            validationResult = IbanFormatViolation.BBAN_ONLY_DIGITS_OR_LETTERS;
+                            break;                            
+                        }
+                    }
+                    break;
+                case BBanEntryCharacterType.N:
+                    foreach (char c in entryValue.ToCharArray())
+                    {
+                        if (!char.IsDigit( c ))
+                        {
+                            validationResult = IbanFormatViolation.BBAN_ONLY_DIGITS;
+                            break;                            
+                        }
+                    }
+                    break;
+            }
+
+            return ( validationResult == IbanFormatViolation.NO_VIOLATION );
         }
 
         private static int calculateMod (string iban)

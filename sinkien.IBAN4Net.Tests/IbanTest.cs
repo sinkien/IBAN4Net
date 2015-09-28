@@ -177,7 +177,7 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
-        public void IbanTooLongBankCodeShouldThrowExcpetion()
+        public void IbanTooLongBankCodeShouldThrowException()
         {
             try
             {

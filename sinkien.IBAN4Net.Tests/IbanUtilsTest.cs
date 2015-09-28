@@ -108,6 +108,22 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithEmptyIBANShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "", out validationResult ) );            
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithEmptyIBANShouldReturnRightResult()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.IBAN_NOT_EMPTY_OR_NULL, validationResult );
+        }
+
+        [TestMethod]
         public void IbanValidationWithOneCharStringSHouldThrowEception()
         {
             try
@@ -118,6 +134,22 @@ namespace sinkien.IBAN4Net.Tests
             {
                 Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_TWO_LETTERS, iex.FormatViolation );
             }
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithOneCharStringShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "A", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithOneCharStringShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "A", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_TWO_LETTERS, validationResult );
         }
 
         [TestMethod]
@@ -134,6 +166,22 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithCountryCodeOnlyShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "CZ", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithCountryCodeOnlyShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "CZ", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.CHECK_DIGIT_TWO_DIGITS, validationResult );
+        }
+
+        [TestMethod]
         public void IbanValidationWithNonDigitCheckDigitShouldThrowException()
         {
             try
@@ -144,6 +192,22 @@ namespace sinkien.IBAN4Net.Tests
             {
                 Assert.AreEqual( IbanFormatViolation.CHECK_DIGIT_ONLY_DIGITS, iex.FormatViolation );
             }
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithNonDigitCheckDigitShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "CZ4T", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithNonDigitCheckDigitShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "CZ4T", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.CHECK_DIGIT_ONLY_DIGITS, validationResult );
         }
 
         [TestMethod]
@@ -160,6 +224,23 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithCountryCodeAndCheckDigitOnlyShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "CZ48", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithCountryCodeAndCheckDigitOnlyShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "CZ48", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_LENGTH, validationResult );
+
+        }
+
+        [TestMethod]
         public void IbanValidationWithLowercaseCountryCodeShouldThrowException()
         {
             try
@@ -170,6 +251,22 @@ namespace sinkien.IBAN4Net.Tests
             {
                 Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS, iex.FormatViolation );
             }
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithLowercaseCountryCodeShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "cz6508000000192000145399", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithLowercaseCountryCodeShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "cz6508000000192000145399", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS, validationResult );
         }
 
         [TestMethod]
@@ -185,10 +282,42 @@ namespace sinkien.IBAN4Net.Tests
             }
         }
 
+        [TestMethod]
+        public void IbanIsValidWithEmptyCountryCodeShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( " _6508000000192000145399", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithEmptyCountryCodeShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( " _6508000000192000145399", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS, validationResult );
+        }
+
         [TestMethod, ExpectedException(typeof(UnsupportedCountryException))]
         public void IbanValidationWithUnsupportedCountryShouldThrowException()
         {
             IbanUtils.Validate( "AM611904300234573201" );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithUnsupportedCountryShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "AM611904300234573201", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithUnsupportedCountryShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "AM611904300234573201", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_UNSUPPORTED, validationResult );
         }
 
         [TestMethod]
@@ -204,16 +333,64 @@ namespace sinkien.IBAN4Net.Tests
             }
         }
 
+        [TestMethod]
+        public void IbanIsValidWithNonExistingCountryShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "JJ611904300234573201", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithNonExistingCountryShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "JJ611904300234573201", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.COUNTRY_CODE_EXISTS, validationResult );
+        }
+
         [TestMethod, ExpectedException(typeof(InvalidCheckDigitException))]
         public void IbanValidationWithInvalidCheckDigitShouldThrowException()
         {            
             IbanUtils.Validate( "AT621904300234573201" );            
         }
 
+        [TestMethod]
+        public void IbanIsValidWithInvalidCheckDigitShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "AT621904300234573201", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidCheckDigitShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "AT621904300234573201", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE, validationResult );
+        }
+
         [TestMethod, ExpectedException(typeof(IbanFormatException))]
         public void IbanValidationWithInvalidLengthShouldThrowException()
         {           
             IbanUtils.Validate( "AT621904300" );            
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidLengthShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "AT621904300", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidLengthShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "AT621904300", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_LENGTH, validationResult );
         }
 
         [TestMethod]
@@ -230,6 +407,23 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithInvalidBBANLengthShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "AT61190430023457320", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidBBANLengthShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "AT61190430023457320", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_LENGTH, validationResult );
+
+        }
+
+        [TestMethod]
         public void IbanValidationWithInvalidBankCodeShouldThrowException()
         {
             try
@@ -240,6 +434,22 @@ namespace sinkien.IBAN4Net.Tests
             {
                 Assert.AreEqual( IbanFormatViolation.BBAN_ONLY_DIGITS, iex.FormatViolation );
             }
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidBankCodeShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "AT611C04300234573201", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidBankCodeShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "AT611C04300234573201", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_ONLY_DIGITS, validationResult );
         }
 
         [TestMethod]
@@ -256,6 +466,22 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithInvalidAccountNumberShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "DE8937040044053201300A", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidAccountNumberShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "DE8937040044053201300A", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_ONLY_DIGITS, validationResult );
+        }
+
+        [TestMethod]
         public void IbanValidationWithInvalidNationalCheckDigitShouldThrowException()
         {
             try
@@ -269,9 +495,41 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
+        public void IbanIsValidWithInvalidNationalCheckDigitShouldReturnFalse()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsFalse( IbanUtils.IsValid( "IT6010542811101000000123456", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithInvalidNationalCheckDigitShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "IT6010542811101000000123456", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.BBAN_ONLY_UPPER_CASE_LETTERS, validationResult );
+        }
+
+        [TestMethod]
         public void IbanValidationWithValidIbanShouldNotThrowException()
         {
             IbanUtils.Validate( "CZ6508000000192000145399" );            
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithValidIbanShouldReturnTrue()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            Assert.IsTrue( IbanUtils.IsValid( "CZ6508000000192000145399", out validationResult ) );
+        }
+
+        [TestMethod]
+        public void IbanIsValidWithValidIbanShouldReturnRightResult ()
+        {
+            IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+            IbanUtils.IsValid( "CZ6508000000192000145399", out validationResult );
+
+            Assert.AreEqual( IbanFormatViolation.NO_VIOLATION, validationResult );
         }
 
         [TestMethod]

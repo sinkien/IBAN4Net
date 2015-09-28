@@ -14,7 +14,8 @@ Some of the differencies from the java project are:
 
 - CountryCode dictionary contains definitions for all of the countries (I hope)
 - Instead of valueOf(), I'm using a pattern of CreateInstance()
-- Iban Builder verifies lengths of some of the parts during formatting and can left-pad them with zeroes if they are shorter than BBAN rule specifies (see examples).
+- Iban Builder verifies lengths of some of the parts during formatting and can left-pad them with zeroes if they are shorter than BBAN rule specifies (see examples)
+- Validation of IBAN and BIC can be done without exceptions (see examples)
 
 
 <b>You can get this library directly to your project from NuGet: <a href="https://www.nuget.org/packages/IBAN4Net/">https://www.nuget.org/packages/IBAN4Net/</a></b>
@@ -60,6 +61,21 @@ catch (IbanFormatException iex)
 {
     // invalid
 }
+
+// Validation of IBAN without throwing an exception:
+IbanFormatViolation validationResult = IbanFormatViolation.NO_VIOLATION;
+if (IbanUtils.IsValid("CZ6508000000192000145399", out validationResult))
+{
+    // valid IBAN
+}
+else
+{
+    // invalid IBAN
+    // validationResult contains reason of unsuccessful validation
+}
+
+
+
 ```
 
 #### BICs:
@@ -77,6 +93,19 @@ catch (BicFormatException bex)
 {
     // invalid
 }
+
+// Validation of BIC without throwing an exception:
+BicFormatViolation validationResult = BicFormatViolation.NO_VIOLATION;
+if (BicUtils.IsValid("DEUTDEFF500", out validationResult))
+{
+    // valid BIC
+}
+else
+{
+    // invalid BIC
+    // validationResult contains reason of unsuccessful validation
+}
+
 
 ```
 

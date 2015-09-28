@@ -75,7 +75,56 @@ namespace sinkien.IBAN4Net
                 throw new BicFormatException( ex.Message, BicFormatViolation.UNKNOWN, ex );
             }
 
-        }        
+        }    
+        
+        /// <summary>
+        /// Validation of BIC string
+        /// </summary>
+        /// <param name="bic">BIC to be validated</param>
+        /// <param name="validationResult">Validation result</param>
+        /// <returns>True if BIC is valid, false if it encounters any problem</returns>
+        public static bool IsValid(string bic, out BicFormatViolation validationResult)
+        {
+            bool result = false;
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            if (!string.IsNullOrEmpty(bic))
+            {
+                if (hasValidLength(bic, out validationResult))
+                {
+                    if (hasValidCase(bic, out validationResult))
+                    {
+                        if (hasValidBankCode(bic, out validationResult))
+                        {
+                            if (hasValidCountryCode(bic, out validationResult))
+                            {
+                                if (hasValidLocationCode(bic, out validationResult))
+                                {
+                                    if (HasBranchCode(bic))
+                                    {
+                                        if (hasValidBranchCode(bic, out validationResult))
+                                        {
+                                            result = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        result = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                validationResult = BicFormatViolation.BIC_NOT_EMPTY_OR_NULL;
+            }
+
+            return result;
+        }
 
         private static void validateEmpty (string bic)
         {
@@ -93,12 +142,36 @@ namespace sinkien.IBAN4Net
             }
         }
 
+        private static bool hasValidLength(string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            if (bic.Length != _BIC8_LENGTH && bic.Length != _BIC11_LENGTH)
+            {
+                validationResult = BicFormatViolation.BIC_LENGTH_8_OR_11;
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
+        }
+
         private static void validateCase (string bic)
         {
             if (!bic.Equals(bic.ToUpper()))
             {
                 throw new BicFormatException( "BIC must contain only upper case letters", BicFormatViolation.BIC_ONLY_UPPER_CASE_LETTERS );
             }
+        }
+
+        private static bool hasValidCase (string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            if (!bic.Equals( bic.ToUpper() ))
+            {
+                validationResult = BicFormatViolation.BIC_ONLY_UPPER_CASE_LETTERS;
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
         }
 
         private static void validateBankCode (string bic)
@@ -112,6 +185,23 @@ namespace sinkien.IBAN4Net
                 }
             }
             
+        }
+
+        private static bool hasValidBankCode(string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            string bankCode = GetBankCode( bic );
+            foreach (char c in bankCode.ToCharArray())
+            {
+                if (!char.IsLetter( c ))
+                {
+                    validationResult = BicFormatViolation.BANK_CODE_ONLY_LETTERS;
+                    break;                    
+                }
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
         }
 
         private static void validateCountryCode (string bic)
@@ -128,6 +218,25 @@ namespace sinkien.IBAN4Net
             }
         }
 
+        private static bool hasValidCountryCode (string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            string countryCode = GetCountryCode( bic );
+            if (countryCode.Trim().Length < _COUNTRY_CODE_LENGTH || !countryCode.Equals( countryCode.ToUpper() ) || !Char.IsLetter( countryCode[0] ) || !Char.IsLetter( countryCode[1] ))
+            {
+                validationResult = BicFormatViolation.COUNTRY_CODE_ONLY_UPPER_CASE_LETTERS;
+            }
+            else
+            {
+                if (CountryCode.GetCountryCode( countryCode ) == null)
+                {
+                    validationResult = BicFormatViolation.COUNTRY_CODE_UNSUPPORTED;
+                }
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
+        }
 
         private static void validateLocationCode (string bic)
         {
@@ -141,6 +250,23 @@ namespace sinkien.IBAN4Net
             }
         }
 
+        private static bool hasValidLocationCode(string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            string locationCode = GetLocationCode( bic );
+            foreach (char c in locationCode.ToCharArray())
+            {
+                if (!char.IsLetterOrDigit( c ))
+                {
+                    validationResult = BicFormatViolation.LOCATION_CODE_ONLY_LETTERS_OR_DIGITS;
+                    break;                    
+                }
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
+        }
+
         private static void validateBranchCode (string bic)
         {
             string branchCode = GetBranchCode( bic );
@@ -151,6 +277,23 @@ namespace sinkien.IBAN4Net
                     throw new BicFormatException( "Branch code must contain only letters or digits", BicFormatViolation.BRANCH_CODE_ONLY_LETTERS_OR_DIGITS );
                 }
             }
+        }
+
+        private static bool hasValidBranchCode(string bic, out BicFormatViolation validationResult)
+        {
+            validationResult = BicFormatViolation.NO_VIOLATION;
+
+            string branchCode = GetBranchCode( bic );
+            foreach (char c in branchCode.ToCharArray())
+            {
+                if (!char.IsLetterOrDigit( c ))
+                {
+                    validationResult = BicFormatViolation.BRANCH_CODE_ONLY_LETTERS_OR_DIGITS;
+                    break;
+                }
+            }
+
+            return ( validationResult == BicFormatViolation.NO_VIOLATION );
         }
 
         public static string GetBankCode (string bic) => bic.Substring( _BANK_CODE_INDEX, _BANK_CODE_LENGTH );
