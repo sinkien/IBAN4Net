@@ -14,7 +14,7 @@ Some of the differencies from the java project are:
 
 - CountryCode dictionary contains definitions for all of the countries (I hope)
 - Instead of valueOf(), I'm using a pattern of CreateInstance()
-- Iban Builder verifies lengths of some of the parts during formatting and can left-pad them with zeroes if they are shorter than BBAN rule specifies (see examples)
+- Iban Builder verifies lengths of some of the parts during formatting and can left-pad them with zeroes if they are shorter than BBAN rule specifies. This feature is enabled by default, but can be disabled (see examples). 
 - Validation of IBAN and BIC can be done without exceptions (see examples)
 
 
@@ -30,19 +30,29 @@ Some of the differencies from the java project are:
 Iban iban = new IbanBuilder()
                 .CountryCode( CountryCode.GetCountryCode( "CZ" ) )
                 .BankCode( "0800" )
-                .AccountNumber( "0000192000145399" )   
+                .AccountNumberPrefix( "000019" )
+                .AccountNumber( "2000145399" )   
                 .Build(); 
 
 // iban.ToString() = CZ6508000000192000145399
 
-// or (supplement missing zeroes):
+// or with autopadding (supplement missing zeroes):
 Iban iban = new IbanBuilder()
                 .CountryCode( CountryCode.GetCountryCode( "CZ" ) )
                 .BankCode( "800" )
-                .AccountNumber( "192000145399" )   
+                .AccountNumberPrefix( "19" )
+                .AccountNumber( "2000145399" )   
                 .Build(); 
 
 // iban.ToString() = CZ6508000000192000145399
+
+// disable autopadding:
+Iban iban = new IbanBuilder()
+                .CountryCode( CountryCode.GetCountryCode( "CZ" ) )
+                .BankCode( "800" )
+                .AccountNumberPrefix( "19" )
+                .AccountNumber( "2000145399" )   
+                .Build(true, false); 
 
 
 // How to get an IBAN object from IBAN string:
