@@ -302,14 +302,14 @@ namespace sinkien.IBAN4Net.Tests
         public void BicShouldReturnCountryCode()
         {
             string test = BicUtils.GetCountryCode( "DEUTDEFF500" );
-            Assert.AreEqual( test, "DE" );
+            Assert.AreEqual( "DE", test );
         }
 
         [TestMethod]
         public void BicShouldReturnBankCode()
         {
             string test = BicUtils.GetBankCode( "DEUTDEFF500" );
-            Assert.AreEqual( test, "DEUT" );
+            Assert.AreEqual( "DEUT", test );
         }
     }
 }

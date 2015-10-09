@@ -94,7 +94,8 @@ namespace sinkien.IBAN4Net
                                                           BBanEntry.AccountNumber( 16, "c" ) ) );
 
             _bbanStructures.Add( "CZ", new BBanStructure( BBanEntry.BankCode( 4, "n" ),
-                                                          BBanEntry.AccountNumber( 16, "n" ) ) );
+                                                          BBanEntry.AccountNumberPrefix( 6, "n" ),
+                                                          BBanEntry.AccountNumber( 10, "n" ) ) );
 
             _bbanStructures.Add( "DE", new BBanStructure( BBanEntry.BankCode( 8, "n" ),
                                                           BBanEntry.AccountNumber( 10, "n" ) ) );
@@ -281,9 +282,10 @@ namespace sinkien.IBAN4Net
 
             _bbanStructures.Add( "SA", new BBanStructure( BBanEntry.BankCode( 2, "n" ),
                                                           BBanEntry.AccountNumber( 18, "c" ) ) );
-            
+
             _bbanStructures.Add( "SK", new BBanStructure( BBanEntry.BankCode( 4, "n" ),
-                                                          BBanEntry.AccountNumber( 16, "n" ) ) );
+                                                          BBanEntry.AccountNumberPrefix( 6, "n" ),
+                                                          BBanEntry.AccountNumber( 10, "n" ) ) );
 
             _bbanStructures.Add( "SI", new BBanStructure( BBanEntry.BankCode( 2, "n" ),
                                                           BBanEntry.BranchCode( 3, "n" ),
@@ -405,6 +407,8 @@ namespace sinkien.IBAN4Net
         public static BBanEntry BankCode (int length, string characterType) => new BBanEntry( BBanEntryType.BANK_CODE, getCharacterType( characterType ), length );
 
         public static BBanEntry BranchCode (int length, string characterType) => new BBanEntry( BBanEntryType.BRANCH_CODE, getCharacterType( characterType ), length );
+
+        public static BBanEntry AccountNumberPrefix (int length, string characterType) => new BBanEntry( BBanEntryType.ACCOUNT_NUMBER_PREFIX, getCharacterType( characterType ), length );
 
         public static BBanEntry AccountNumber (int length, string characterType) => new BBanEntry( BBanEntryType.ACCOUNT_NUMBER, getCharacterType( characterType ), length );
 

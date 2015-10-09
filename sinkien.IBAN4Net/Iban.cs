@@ -56,6 +56,8 @@ namespace sinkien.IBAN4Net
 
         public string GetAccountNumber() => IbanUtils.GetAccountNumber( Value );
 
+        public string GetAccountNumberPrefix () => IbanUtils.GetAccountNumberPrefix( Value );
+
         public string GetBankCode() => IbanUtils.GetBankCode( Value );
 
         public string GetBranchCode () => IbanUtils.GetBranchCode( Value );

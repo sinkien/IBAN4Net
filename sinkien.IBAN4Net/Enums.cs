@@ -28,6 +28,7 @@ namespace sinkien.IBAN4Net
     {
         BANK_CODE,
         BRANCH_CODE,
+        ACCOUNT_NUMBER_PREFIX,
         ACCOUNT_NUMBER,
         NATIONAL_CHECK_DIGIT,
         ACCOUNT_TYPE,
@@ -42,7 +43,7 @@ namespace sinkien.IBAN4Net
     {
         N = 'n',    // Digits (numbers 0-9)
         A = 'a',    // Upper case letters (A-Z)
-        C = 'c'    // Alphanumeric (a-z, A-Z, 0-9)        
+        C = 'c'     // Alphanumeric (a-z, A-Z, 0-9)        
     }
 
     /// <summary>
@@ -86,7 +87,11 @@ namespace sinkien.IBAN4Net
         BBAN_ENTRY_TOO_LONG,
         BANK_CODE_NOT_NULL,
         BANK_CODE_TOO_LONG,
+        BANK_CODE_TOO_SHORT,
         ACCOUNT_NUMBER_NOT_NULL,
-        ACCOUNT_NUMBER_TOO_LONG
+        ACCOUNT_NUMBER_TOO_LONG,
+        ACCOUNT_NUMBER_TOO_SHORT,
+        ACCOUNT_NUMBER_PREFIX_TOO_LONG,
+        ACCOUNT_NUMBER_PREFIX_TOO_SHORT
     }    
 }

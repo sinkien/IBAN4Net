@@ -122,7 +122,8 @@ namespace sinkien.IBAN4Net
         /// </summary>
         /// <param name="countryCode">Country code object</param>
         /// <returns>True if country code is supported, othewise false</returns>
-        public static bool IsSupportedCountry (CountryCodeEntry countryCode) => Bban.GetStructureForCountry( countryCode ) != null;
+        public static bool IsSupportedCountry (CountryCodeEntry countryCode) => (CountryCode.GetCountryCode(countryCode?.Alpha2) != null) && (Bban.GetStructureForCountry( countryCode ) != null);
+        
 
         /// <summary>
         /// Checks whether country is supported.
@@ -130,7 +131,7 @@ namespace sinkien.IBAN4Net
         /// </summary>
         /// <param name="alpha2Code">Alpha2 code for country</param>
         /// <returns>True if country code is supported, othewise false</returns>
-        public static bool IsSupportedCountry (string alpha2Code) => Bban.GetStructureForCountry( alpha2Code ) != null;
+        public static bool IsSupportedCountry (string alpha2Code) => ( CountryCode.GetCountryCode( alpha2Code ) != null ) && ( Bban.GetStructureForCountry( alpha2Code ) != null);
 
         /// <summary>
         /// Returns IBAN length for the specified country
@@ -213,6 +214,14 @@ namespace sinkien.IBAN4Net
         /// <returns>IBAN's account number as string</returns>
         public static string GetAccountNumber (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_NUMBER );
 
+
+        /// <summary>
+        /// Returns IBAN's account number prefix      
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>IBAN's account number as string (if it is present)</returns>
+        public static string GetAccountNumberPrefix (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_NUMBER_PREFIX );
+
         /// <summary>
         /// Returns a new IBAN string with changed account number
         /// Automatically adds zeros to the beginning in order to maintain the length specified by the BBAN rule
@@ -222,7 +231,16 @@ namespace sinkien.IBAN4Net
         /// <returns>IBAN with changed account number and recalculated check digit</returns>
         /// <exception cref="IbanFormatException">Thrown when new account number is longer, than that is specified in BBAN rules</exception>
         public static string ChangeAccountNumber (string iban, string newAccountNumber) => changeBbanEntry( iban, newAccountNumber, BBanEntryType.ACCOUNT_NUMBER );
-        
+
+        /// <summary>
+        /// Returns a new IBAN string with changed account number prefix
+        /// Automatically adds zeros to the beginning in order to maintain the length specified by the BBAN rule
+        /// </summary>
+        /// <param name="iban">Original IBAN</param>
+        /// <param name="newAccountNumberPrefix">The new account number prefix</param>
+        /// <returns>IBAN with changed account number prefix and recalculated check digit</returns>
+        /// <exception cref="IbanFormatException">Thrown when new account number is longer, than that is specified in BBAN rules</exception>
+        public static string ChangeAccountNumberPrefix (string iban, string newAccountNumberPrefix) => changeBbanEntry( iban, newAccountNumberPrefix, BBanEntryType.ACCOUNT_NUMBER_PREFIX );
 
         /// <summary>
         /// Returns IBAN'S bank code

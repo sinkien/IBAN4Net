@@ -68,7 +68,7 @@ namespace sinkien.IBAN4Net.Tests
         public void IbanGetLegnthShouldReturnValidLength ()
         {
             string testIban = "CZ6508000000192000145399";
-            Iban testObject = new IbanBuilder().CountryCode( CountryCode.GetCountryCode( "CZ" ) ).BankCode( "0800" ).AccountNumber( "0000192000145399" ).Build();            
+            Iban testObject = new IbanBuilder().CountryCode( CountryCode.GetCountryCode( "CZ" ) ).BankCode( "0800" ).AccountNumberPrefix( "000019").AccountNumber( "2000145399" ).Build();            
             Assert.AreEqual( testIban.Length, IbanUtils.GetIbanLength(testObject.GetCountryCode() ));
         }
 
@@ -76,16 +76,16 @@ namespace sinkien.IBAN4Net.Tests
         public void CheckDigitCalculationWithIbanObject()
         {
             string testIban = "CZ6508000000192000145399";
-            Iban testObject = new IbanBuilder().CountryCode( CountryCode.GetCountryCode( "CZ" ) ).BankCode( "0800" ).AccountNumber( "0000192000145399" ).Build();
+            Iban testObject = new IbanBuilder().CountryCode( CountryCode.GetCountryCode( "CZ" ) ).BankCode( "0800" ).AccountNumberPrefix( "000019" ).AccountNumber( "2000145399" ).Build();
             string checkDigit = IbanUtils.CalculateCheckDigit( testIban );
-            Assert.AreEqual( checkDigit, testIban.Substring( 2, 2 ) );            
+            Assert.AreEqual( testIban.Substring( 2, 2 ), checkDigit );            
         }
 
         [TestMethod]
         public void CheckDigitCalculationWithIbanString()
         {
             string checkDigit = IbanUtils.CalculateCheckDigit( "CZ6508000000192000145399" );
-            Assert.AreEqual( checkDigit, "65" );
+            Assert.AreEqual( "65", checkDigit );
         }
 
         [TestMethod, ExpectedException(typeof(IbanFormatException))]
@@ -536,41 +536,47 @@ namespace sinkien.IBAN4Net.Tests
         public void IbanUtilGetAccountNumberShouldReturnAccountNumber()
         {
             string testIban = "CZ6508000000192000145399";
-            Assert.AreEqual( IbanUtils.GetAccountNumber( testIban ), "0000192000145399" );            
+            Assert.AreEqual( "2000145399", IbanUtils.GetAccountNumber( testIban ) );            
+        }
+
+        [TestMethod]
+        public void IbanUtilGetAccountNumberPrefixShouldReturnAccountPrefix()
+        {
+            string testIban = "CZ6508000000192000145399";
+            Assert.AreEqual( "000019", IbanUtils.GetAccountNumberPrefix( testIban ) );
         }
 
         [TestMethod]
         public void IbanUtilGetBankCodeShouldReturnBankCode()
         {
             string testIban = "CZ6508000000192000145399";
-            Assert.AreEqual( IbanUtils.GetBankCode( testIban ), "0800" );            
+            Assert.AreEqual( "0800", IbanUtils.GetBankCode( testIban ) );            
         }
 
         [TestMethod]
         public void IbanUtilGetBBanShouldReturnBBan()
         {
             string testIban = "CZ6508000000192000145399";
-            Assert.AreEqual( IbanUtils.GetBBan( testIban ), "08000000192000145399" );
+            Assert.AreEqual( "08000000192000145399", IbanUtils.GetBBan( testIban ) );
         }
 
         [TestMethod]
         public void IbanUtilChangeAccountNumber ()
         {
             string iban = "CZ6508000000999999999999";
-            string changed = IbanUtils.ChangeAccountNumber( iban, "0000192000145399" );
+            string changed = IbanUtils.ChangeAccountNumber( iban, "2000145399" );
 
-            Assert.AreEqual( "CZ6508000000192000145399", changed );
+            Assert.AreEqual( "CZ5208000000992000145399", changed );
         }
 
         [TestMethod]
         public void IbanUtilChangeAccountNumberShouldPadItself()
         {
             string iban = "CZ6508000000999999999999";
-            string changed = IbanUtils.ChangeAccountNumber( iban, "192000145399" );
+            string changed = IbanUtils.ChangeAccountNumber( iban, "145399" );
 
-            Assert.AreEqual( "CZ6508000000192000145399", changed );
-        }
-
+            Assert.AreEqual( "CZ4508000000990000145399", changed );
+        }        
 
         [TestMethod]
         public void IbanUtilChangeAccountNumberWithTooLongNumberShouldThrowException()
@@ -611,6 +617,38 @@ namespace sinkien.IBAN4Net.Tests
             {
                 string iban = "CZ6511110000192000145399";
                 string changed = IbanUtils.ChangeBankCode( iban, "11111" );
+            }
+            catch (IbanFormatException iex)
+            {
+                Assert.AreEqual( IbanFormatViolation.BBAN_ENTRY_TOO_LONG, iex.FormatViolation );
+            }
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeAccountPrefix ()
+        {
+            string iban = "CZ6508000000999999999999";
+            string changed = IbanUtils.ChangeAccountNumberPrefix( iban, "145388" );
+
+            Assert.AreEqual( "CZ8308001453889999999999", changed );
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeAccountPrefixShouldPadItself ()
+        {
+            string iban = "CZ6508000000999999999999";
+            string changed = IbanUtils.ChangeAccountNumberPrefix( iban, "8" );
+
+            Assert.AreEqual( "CZ1508000000089999999999", changed );
+        }
+
+        [TestMethod]
+        public void IbanUtilChangeAccountPrefixWithTooLongNumberShouldThrowException ()
+        {
+            try
+            {
+                string iban = "CZ6508000000999999999999";
+                string changed = IbanUtils.ChangeAccountNumberPrefix( iban, "9999998" );
             }
             catch (IbanFormatException iex)
             {

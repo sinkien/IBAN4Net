@@ -73,7 +73,7 @@ namespace sinkien.IBAN4Net.Tests
         public void GetCountryCodeWithCZAplha2ShouldReturnCZEAsAplha3()
         {
             CountryCodeEntry entry = CountryCode.GetCountryCode( "CZ" );
-            Assert.AreEqual( entry.Alpha3, "CZE" );
+            Assert.AreEqual( "CZE", entry.Alpha3 );
         }
 
     }

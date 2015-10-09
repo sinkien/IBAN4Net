@@ -81,7 +81,7 @@ namespace sinkien.IBAN4Net.Tests
         public void BicShouldReturnBankCode()
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
-            Assert.AreEqual( bic.BankCode, "DEUT" );
+            Assert.AreEqual( "DEUT", bic.BankCode );
         }
 
         [TestMethod]
@@ -89,35 +89,35 @@ namespace sinkien.IBAN4Net.Tests
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
 
-            Assert.AreEqual( bic.GetCountryCode().Alpha2, "DE" );
+            Assert.AreEqual( "DE", bic.GetCountryCode().Alpha2 );
         }
 
         [TestMethod]
         public void BicShouldReturnBranchCode()
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
-            Assert.AreEqual( bic.GetBranchCode(), "500" );
+            Assert.AreEqual( "500", bic.GetBranchCode() );
         }
 
         [TestMethod]
         public void BicWithoutBranchCodeShoulRetunEmpty()
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF" );
-            Assert.AreEqual( bic.GetBranchCode(), string.Empty );
+            Assert.AreEqual( string.Empty, bic.GetBranchCode() );
         }
 
         [TestMethod]
         public void BicShouldReturnLocationCode()
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
-            Assert.AreEqual( bic.LocationCode, "FF" );
+            Assert.AreEqual( "FF", bic.LocationCode );
         }
 
         [TestMethod]
         public void BicToStringShoulReturnString()
         {
             Bic bic = Bic.CreateInstance( "DEUTDEFF500" );
-            Assert.AreEqual( bic.ToString(), "DEUTDEFF500" );
+            Assert.AreEqual( "DEUTDEFF500", bic.ToString() );
         }
     }
 }
