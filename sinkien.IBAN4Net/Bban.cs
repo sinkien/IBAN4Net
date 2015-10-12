@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace sinkien.IBAN4Net
 {
@@ -350,6 +351,26 @@ namespace sinkien.IBAN4Net
                         result = bban._bbanStructures[alpha2Code];
                     }
                 }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Checks if specified BBAN entry is supported for given country code.
+        /// </summary>
+        /// <param name="alpha2Code">Alpha2 Country code</param>
+        /// <param name="entryType">BBAN entry type</param>
+        /// <returns>True if given country contains rule for specified entry</returns>
+        public static bool IsBbanEntrySupported (string alpha2Code, BBanEntryType entryType)
+        {
+            Bban bban = new Bban();
+            BBanStructure structure = GetStructureForCountry( alpha2Code );
+            bool result = false;
+                     
+            if (structure != null)
+            {
+                result = structure.Entries.Any( x => x.EntryType == entryType );
             }
 
             return result;

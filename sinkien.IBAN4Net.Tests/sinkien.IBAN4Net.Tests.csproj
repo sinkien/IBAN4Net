@@ -58,6 +58,7 @@
     <Compile Include="CountryCodeTest.cs" />
     <Compile Include="IbanUtilsTest.cs" />
     <Compile Include="IbanTest.cs" />
+    <Compile Include="BbanTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sinkien.IBAN4Net\sinkien.IBAN4Net.csproj">
