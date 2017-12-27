@@ -166,6 +166,10 @@ namespace sinkien.IBAN4Net
                                                           BBanEntry.AccountNumber( 6, "n" ),
                                                           BBanEntry.IdentificationNumber( 10, "n" ) ) );
 
+            _bbanStructures.Add("IE", new BBanStructure( BBanEntry.BankCode( 4, "a" ),
+                                                         BBanEntry.BranchCode( 6, "n" ),
+                                                         BBanEntry.AccountNumber( 8, "n" ) ) );
+
             _bbanStructures.Add( "IL", new BBanStructure( BBanEntry.BankCode( 3, "n" ),
                                                           BBanEntry.BranchCode( 3, "n" ),
                                                           BBanEntry.AccountNumber( 13, "n" ) ) );

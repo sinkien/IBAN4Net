@@ -28,7 +28,7 @@ namespace sinkien.IBAN4Net.Tests
     public class IbanUtilsTest
     {
         [TestMethod]
-        public void IbanCountrySupportCheckWithNullShouldReturnFalse ()
+        public void IbanCountrySupportCheckWithNullShouldReturnFalse()
         {
             CountryCodeEntry entry = null;
             Assert.IsFalse( IbanUtils.IsSupportedCountry( entry ) );
@@ -47,7 +47,7 @@ namespace sinkien.IBAN4Net.Tests
         }
 
         [TestMethod]
-        public void IbanCountrySupportCheckWithUnsupportedCountryShouldReutnFalse_object ()
+        public void IbanCountrySupportCheckWithUnsupportedCountryShouldReutnFalse_object()
         {
             Assert.IsFalse( IbanUtils.IsSupportedCountry( CountryCode.GetCountryCode( "AM" ) ) );
         }
@@ -62,6 +62,13 @@ namespace sinkien.IBAN4Net.Tests
         public void IbanCountrySupportCheckWithSupportedCountryShouldRetrunTrue_string ()
         {
             Assert.IsTrue( IbanUtils.IsSupportedCountry( "CZ" ));
+        }
+
+        [TestMethod]
+        [WorkItem(4)]
+        public void IbanCountrySupportCheckWithIrelandShouldRetrunTrue_string()
+        {
+            Assert.IsTrue( IbanUtils.IsSupportedCountry( "IE" ) );
         }
 
         [TestMethod]
