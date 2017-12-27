@@ -82,7 +82,7 @@ namespace sinkien.IBAN4Net
                                                           BBanEntry.AccountType( 1, "a" ),
                                                           BBanEntry.OwnerAccountNumber( 1, "c" ) ) );
 
-            _bbanStructures.Add( "BG", new BBanStructure( BBanEntry.BankCode( 4, "n" ),
+            _bbanStructures.Add( "BG", new BBanStructure( BBanEntry.BankCode( 4, "a" ),
                                                           BBanEntry.BranchCode( 4, "n" ),
                                                           BBanEntry.AccountType( 2, "n" ),
                                                           BBanEntry.AccountNumber( 8, "c" ) ) );
