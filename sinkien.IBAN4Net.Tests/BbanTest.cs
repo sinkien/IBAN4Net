@@ -37,7 +37,7 @@ namespace sinkien.IBAN4Net.Tests
 
         [TestMethod]
         [WorkItem(3)]
-        public void IbanCountrySupportCheckWithBulgariaShouldRetrunTrue_string()
+        public void BbanGetStructureForCountryBulgariaShouldReturnStructureForBulgaria()
         {
             BBanStructure structure = Bban.GetStructureForCountry( "BG" );
             Assert.IsNotNull(structure);
