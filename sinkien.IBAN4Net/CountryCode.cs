@@ -107,6 +107,7 @@ namespace sinkien.IBAN4Net
             _alpha3Map.Add( "AG", new CountryCodeEntry() { Alpha2 = "AG", Alpha3 = "ATG", CountryName = "Antigua and Barbuda" } );
             _alpha3Map.Add( "AR", new CountryCodeEntry() { Alpha2 = "AR", Alpha3 = "ARG", CountryName = "Argentina" } );
             _alpha3Map.Add( "AM", new CountryCodeEntry() { Alpha2 = "AM", Alpha3 = "ARM", CountryName = "Armenia" } );
+            _alpha3Map.Add( "AM", new CountryCodeEntry() { Alpha2 = "AN", Alpha3 = "ANT", CountryName = "Netherlands Antilles" } );
             _alpha3Map.Add( "AW", new CountryCodeEntry() { Alpha2 = "AW", Alpha3 = "ABW", CountryName = "Aruba" } );
             _alpha3Map.Add( "AU", new CountryCodeEntry() { Alpha2 = "AU", Alpha3 = "AUS", CountryName = "Australia" } );
             _alpha3Map.Add( "AZ", new CountryCodeEntry() { Alpha2 = "AZ", Alpha3 = "AZE", CountryName = "Azerbaijan" } );
