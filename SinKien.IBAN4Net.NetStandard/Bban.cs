@@ -65,7 +65,7 @@ namespace SinKien.IBAN4Net
                                                             BBanEntry.AccountNumber(20, "c")));
 
             _bbanStructures.Add("BH", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.AccountNumber(14, "n")));
+                                                            BBanEntry.AccountNumber(14, "c")));
 
             _bbanStructures.Add("BE", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(7, "n"),

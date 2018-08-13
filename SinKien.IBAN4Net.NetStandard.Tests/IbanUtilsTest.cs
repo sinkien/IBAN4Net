@@ -132,7 +132,7 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
-        public void IbanValidationWithOneCharStringSHouldThrowEception()
+        public void IbanValidationWithOneCharStringShouldThrowEception()
         {
             try
             {
@@ -662,6 +662,6 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
             {
                 Assert.AreEqual(IbanFormatViolation.BBAN_ENTRY_TOO_LONG, iex.FormatViolation);
             }
-        }
+        }        
     }
 }

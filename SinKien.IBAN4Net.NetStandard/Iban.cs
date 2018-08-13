@@ -41,13 +41,13 @@ namespace SinKien.IBAN4Net
         /// Specified IBAN string undergoes validation
         /// </summary>
         /// <param name="iban"></param>
-        /// <returns></returns>
+        /// <returns>A new Iban object instance</returns>
         public static Iban CreateInstance(string iban)
         {
             IbanUtils.Validate(iban);
             return new Iban(iban);
         }
-
+        
         public CountryCodeEntry GetCountryCode() => CountryCode.GetCountryCode(IbanUtils.GetCountryCode(Value));
 
         public string GetCheckDigit() => IbanUtils.GetCheckDigit(Value);

@@ -200,6 +200,12 @@ namespace SinKien.IBAN4Net
             return Build(validate);
         }
 
+        public Iban ParseFromNationalFormat(string nationalFormat, string countryCode)
+        {
+            // TODO
+            return null;
+        }
+
         /// <summary>
         /// Format IBAN string with deafult check digit
         /// </summary>

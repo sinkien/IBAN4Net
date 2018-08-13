@@ -165,10 +165,22 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
-        public void IbanAccountNUmberPrefixShouldPadITselfAccordingToBBANRule()
+        public void IbanAccountNumberPrefixShouldPadItselfAccordingToBBANRule()
         {
             Iban iban = new IbanBuilder().CountryCode(CountryCode.GetCountryCode("CZ")).BankCode("100").AccountNumberPrefix("19").AccountNumber("2000145399").Build();
             Assert.AreEqual("000019", iban.GetAccountNumberPrefix());
+        }
+
+        [TestMethod]
+        public void IbanCreationFromPartsShouldSucceed()
+        {
+            // all parts will autopad itselves
+            Iban iban = new IbanBuilder().CountryCode(CountryCode.GetCountryCode("CZ"))
+                .BankCode("2010")
+                .AccountNumber("2300121591")
+                .Build();
+
+            Assert.AreEqual("CZ2820100000002300121591", iban.ToString());
         }
 
         [TestMethod]
