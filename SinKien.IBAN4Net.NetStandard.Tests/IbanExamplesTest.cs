@@ -32,5 +32,32 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
 
             Assert.AreEqual("BY86AKBB10100000002966000000", belarusIban.ToString());
         }
+
+        [TestMethod]
+        public void Madagascar_ValidIbanShouldPass()
+        {            
+            IbanUtils.IsValid("MG4600005030071289421016045", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Madagascar_IbanBuilderShouldBuildValidIban()
+        {
+            Iban madagascarIban = new IbanBuilder().CountryCode(CountryCode.GetCountryCode("MG"))                                
+                .BankCode("00005")
+                .BranchCode("03007")
+                .AccountNumber("12894210160")
+                .NationalCheckDigit("45")
+                .Build();
+
+            Assert.AreEqual("MG4600005030071289421016045", madagascarIban.ToString());
+        }
+
+        [TestMethod]
+        public void Madagascar_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("MG4600005030071289421016095", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
     }
 }

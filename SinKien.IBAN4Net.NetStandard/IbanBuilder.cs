@@ -216,6 +216,7 @@ namespace SinKien.IBAN4Net
         public Iban ParseFromNationalFormat(string nationalFormat, string countryCode)
         {
             // TODO
+            // XX-XXXXXX/XXXX
             return null;
         }
 

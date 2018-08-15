@@ -212,6 +212,12 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("LU", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(13, "c")));
 
+            // MG is same as FR (according to Nordea's list)
+            _bbanStructures.Add("MG", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                            BBanEntry.BranchCode(5, "n"),
+                                                            BBanEntry.AccountNumber(11, "c"),
+                                                            BBanEntry.NationalCheckDigit(2, "n")));
+
             _bbanStructures.Add("MK", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(10, "c"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
