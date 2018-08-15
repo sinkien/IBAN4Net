@@ -216,6 +216,13 @@ namespace SinKien.IBAN4Net
         public static string GetAccountNumberPrefix(string iban) => extractBbanEntry(iban, BBanEntryType.ACCOUNT_NUMBER_PREFIX);
 
         /// <summary>
+        /// Returns IBAN's balance account number
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>IBAN's balance account number as string (if it is present)</returns>
+        public static string GetBalanceAccountNumber(string iban) => extractBbanEntry(iban, BBanEntryType.BALANCE_ACCOUNT_NUMBER);
+
+        /// <summary>
         /// Returns a new IBAN string with changed account number
         /// Automatically adds zeros to the beginning in order to maintain the length specified by the BBAN rule
         /// </summary>

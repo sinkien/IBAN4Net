@@ -55,6 +55,7 @@
     <Compile Include="CountryCodeTest.cs" />
     <Compile Include="IbanTest.cs" />
     <Compile Include="IbanUtilsTest.cs" />
+    <Compile Include="IbanExamplesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

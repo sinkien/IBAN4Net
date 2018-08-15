@@ -130,6 +130,13 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void IbanShouldReturnValidBalanceAccountNumber()
+        {
+           Iban iban = Iban.CreateInstance("BY86AKBB10100000002966000000");
+           Assert.AreEqual("1010", iban.GetBalanceAccountNumber());
+        }
+
+        [TestMethod]
         public void IbanShouldReturnValidBBan()
         {
             Iban iban = new IbanBuilder().CountryCode(CountryCode.GetCountryCode("CZ")).BankCode("0800").AccountNumberPrefix("000019").AccountNumber("2045654526").Build();

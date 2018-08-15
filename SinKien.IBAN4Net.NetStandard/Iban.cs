@@ -68,6 +68,8 @@ namespace SinKien.IBAN4Net
 
         public string GetIdentificationNumber() => IbanUtils.GetIdentificationNumber(Value);
 
+        public string GetBalanceAccountNumber() => IbanUtils.GetBalanceAccountNumber(Value);
+
         public string GetBBan() => IbanUtils.GetBBan(Value);
 
         /// <summary>

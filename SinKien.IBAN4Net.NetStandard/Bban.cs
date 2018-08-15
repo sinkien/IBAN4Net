@@ -87,6 +87,11 @@ namespace SinKien.IBAN4Net
                                                             BBanEntry.AccountType(2, "n"),
                                                             BBanEntry.AccountNumber(8, "c")));
 
+            // since 2017
+            _bbanStructures.Add("BY", new BBanStructure(BBanEntry.BankCode(4, "c"),
+                                                            BBanEntry.BalanceAccountNumber(4, "n"),
+                                                            BBanEntry.AccountNumber(16, "n")));
+
             _bbanStructures.Add("CR", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(14, "n")));
 
@@ -444,6 +449,8 @@ namespace SinKien.IBAN4Net
         public static BBanEntry OwnerAccountNumber(int length, string characterType) => new BBanEntry(BBanEntryType.OWNER_ACCOUNT_NUMBER, getCharacterType(characterType), length);
 
         public static BBanEntry IdentificationNumber(int length, string characterType) => new BBanEntry(BBanEntryType.IDENTIFICATION_NUMBER, getCharacterType(characterType), length);
+
+        public static BBanEntry BalanceAccountNumber(int length, string characterType) => new BBanEntry(BBanEntryType.BALANCE_ACCOUNT_NUMBER, getCharacterType(characterType), length);
 
         private static BBanEntryCharacterType getCharacterType(string character)
         {
