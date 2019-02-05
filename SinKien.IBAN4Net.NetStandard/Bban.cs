@@ -337,7 +337,7 @@ namespace SinKien.IBAN4Net
                 
                 if (_bbanStructures.ContainsKey(countryCode.Alpha2))
                 {
-                    result = _bbanStructures[countryCode.Alpha2];
+                    result = _bbanStructures[countryCode.Alpha2].Clone();
                 }
                 
             }
@@ -358,7 +358,7 @@ namespace SinKien.IBAN4Net
             {                
                 if (_bbanStructures.ContainsKey(alpha2Code.ToUpper()))
                 {
-                    result = _bbanStructures[alpha2Code];
+                    result = _bbanStructures[alpha2Code].Clone();
                 }
                 
             }
@@ -416,6 +416,17 @@ namespace SinKien.IBAN4Net
 
             return length;
         }
+
+        public BBanStructure Clone()
+        {
+            BBanStructure result = new BBanStructure();
+            foreach (var item in Entries)
+            {
+                result.Entries.Add(new BBanEntry(item.EntryType, item.CharacterType, item.Length));
+
+            }
+            return result;
+        }
     }
 
     /// <summary>
@@ -427,7 +438,7 @@ namespace SinKien.IBAN4Net
         public BBanEntryCharacterType CharacterType { get; private set; }
         public int Length { get; private set; } = 0;
 
-        private BBanEntry(BBanEntryType entryType, BBanEntryCharacterType characterType, int length)
+        internal BBanEntry(BBanEntryType entryType, BBanEntryCharacterType characterType, int length)
         {
             EntryType = entryType;
             CharacterType = characterType;
