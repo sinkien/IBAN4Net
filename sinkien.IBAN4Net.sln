@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SinKien.IBAN4Net.NetStandar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinKien.IBAN4Net.NetStandard.Tests.Net45", "SinKien.IBAN4Net.NetStandard.Tests\SinKien.IBAN4Net.NetStandard.Tests.Net45.csproj", "{FC1CAF73-0B98-4916-A489-C5A3F7B9A441}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sinkien.IBAN4Net.PerfTests", "sinkien.IBAN4Net.PerfTests\sinkien.IBAN4Net.PerfTests.csproj", "{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FC1CAF73-0B98-4916-A489-C5A3F7B9A441}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1CAF73-0B98-4916-A489-C5A3F7B9A441}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1CAF73-0B98-4916-A489-C5A3F7B9A441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
