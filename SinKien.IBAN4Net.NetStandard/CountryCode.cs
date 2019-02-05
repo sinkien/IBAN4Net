@@ -65,17 +65,15 @@ namespace SinKien.IBAN4Net
 
         private static CountryCodeEntry getByAlpha2(string code)
         {
-            CountryCodeEntry result = null;
-
             if (_alpha3Map != null)
             {
                 if (_alpha3Map.ContainsKey(code))
                 {
-                    result = _alpha3Map[code];
+                    return _alpha3Map[code].Clone();
                 }
             }
 
-            return result;
+            return null;
         }
 
         private static CountryCodeEntry getByAlpha3(string code)
@@ -85,6 +83,8 @@ namespace SinKien.IBAN4Net
             if (_alpha3Map != null)
             {
                 result = _alpha3Map.Values.Where(x => x.Alpha3.Equals(code)).SingleOrDefault();
+                if (result != null)
+                    result = result.Clone();
             }
 
             return result;
@@ -379,6 +379,10 @@ namespace SinKien.IBAN4Net
             }
 
             return false;
+        }
+        public CountryCodeEntry Clone()
+        {
+            return new CountryCodeEntry() { Alpha2 = this.Alpha2, Alpha3 = this.Alpha3, CountryName = this.CountryName };            
         }
     }
 }

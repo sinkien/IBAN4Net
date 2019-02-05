@@ -31,9 +31,9 @@ namespace sinkien.IBAN4Net
     /// </summary>
     public class Bban
     {
-        private SortedDictionary<string, BBanStructure> _bbanStructures = null;
+        private static SortedDictionary<string, BBanStructure> _bbanStructures = null;
 
-        public Bban()
+        static Bban()
         {
             loadStructures();
         }
@@ -41,7 +41,7 @@ namespace sinkien.IBAN4Net
         /// <summary>
         /// Loads BBANs structures definitions
         /// </summary>
-        private void loadStructures()
+        private static void loadStructures()
         {
             _bbanStructures = new SortedDictionary<string, BBanStructure>();
 
@@ -319,18 +319,15 @@ namespace sinkien.IBAN4Net
         /// <returns>BBAN structure of defined country, or null if given country code is unsupported</returns>
         public static BBanStructure GetStructureForCountry (CountryCodeEntry countryCode)
         {
-            Bban bban = new Bban();
+            
             BBanStructure result = null;
 
             if (countryCode != null)
-            {
-                if (bban._bbanStructures != null)
+            {              
+                if (_bbanStructures.ContainsKey( countryCode.Alpha2 ))
                 {
-                    if (bban._bbanStructures.ContainsKey( countryCode.Alpha2 ))
-                    {
-                        result = bban._bbanStructures[countryCode.Alpha2];
-                    }
-                }
+                    result = _bbanStructures[countryCode.Alpha2].Clone();
+                }            
             }
             
             return result;
@@ -342,19 +339,17 @@ namespace sinkien.IBAN4Net
         /// <param name="alpha2Code">Alpha2 Country code</param>
         /// <returns>BBAN structure of defined country, or null if given country code is unsupported</returns>
         public static BBanStructure GetStructureForCountry (string alpha2Code)
-        {
-            Bban bban = new Bban();
+        {            
             BBanStructure result  = null;
 
             if (!string.IsNullOrEmpty(alpha2Code) && alpha2Code.Length == 2)
             {
-                if (bban._bbanStructures != null)
+                
+                if (_bbanStructures.ContainsKey(alpha2Code.ToUpper()))
                 {
-                    if (bban._bbanStructures.ContainsKey(alpha2Code.ToUpper()))
-                    {
-                        result = bban._bbanStructures[alpha2Code];
-                    }
+                    result = _bbanStructures[alpha2Code].Clone();
                 }
+                
             }
 
             return result;
@@ -367,8 +362,7 @@ namespace sinkien.IBAN4Net
         /// <param name="entryType">BBAN entry type</param>
         /// <returns>True if given country contains rule for specified entry</returns>
         public static bool IsBbanEntrySupported (string alpha2Code, BBanEntryType entryType)
-        {
-            Bban bban = new Bban();
+        {            
             BBanStructure structure = GetStructureForCountry( alpha2Code );
             bool result = false;
                      
@@ -394,7 +388,7 @@ namespace sinkien.IBAN4Net
 
         public BBanStructure(params BBanEntry[] entries)
         {
-            Entries = new List<BBanEntry>( entries );
+            Entries = new List<BBanEntry>(entries);
         }
 
         /// <summary>
@@ -411,6 +405,17 @@ namespace sinkien.IBAN4Net
 
             return length;
         }
+
+        public BBanStructure Clone()
+        {
+            BBanStructure result = new BBanStructure();
+            foreach (var item in Entries)
+            {
+                result.Entries.Add(new BBanEntry(item.EntryType, item.CharacterType, item.Length));
+                
+            }
+            return result;
+        }
     }
 
     /// <summary>
@@ -422,7 +427,7 @@ namespace sinkien.IBAN4Net
         public BBanEntryCharacterType CharacterType { get; private set; }
         public int Length { get; private set; } = 0;
 
-        private BBanEntry (BBanEntryType entryType, BBanEntryCharacterType characterType, int length)
+        internal BBanEntry (BBanEntryType entryType, BBanEntryCharacterType characterType, int length)
         {
             EntryType = entryType;
             CharacterType = characterType;

@@ -28,6 +28,20 @@ namespace sinkien.IBAN4Net.Tests
     public class CountryCodeTest
     {
         [TestMethod]
+        public void GetCountryAndChangeShouldNotChangeOtherCountries()
+        {
+            string oldName;
+            CountryCodeEntry entry = CountryCode.GetCountryCode("CY");
+            Assert.IsNotNull(entry);
+            oldName = entry.CountryName;
+            entry.CountryName = "Change to this";            
+            CountryCodeEntry newEntry = CountryCode.GetCountryCode("CY");
+            Assert.IsNotNull(newEntry);
+            Assert.AreEqual(oldName, newEntry.CountryName);
+
+        }
+
+        [TestMethod]
         public void GetCountryCodeWithEmptyStringShouldReturnNullObject ()
         {
             CountryCodeEntry entry = CountryCode.GetCountryCode( "" );
