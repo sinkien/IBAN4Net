@@ -65,6 +65,17 @@ namespace sinkien.IBAN4Net
             return result;
         }
 
+        /// <summary>
+        /// Gets available CountryCode objects from map
+        /// </summary>
+        /// <returns>Available CountryCodeItem objects</returns>
+        public static IEnumerable<CountryCodeEntry> GetCountryCodes ()
+        {
+            CountryCode cc = new CountryCode();
+
+            return cc._alpha3Map.Select(m => m.Value);
+        }
+
         private  CountryCodeEntry getByAlpha2 (string code)
         {
             CountryCodeEntry result = null;

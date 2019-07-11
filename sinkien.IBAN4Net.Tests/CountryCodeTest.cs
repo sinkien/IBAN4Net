@@ -20,6 +20,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace sinkien.IBAN4Net.Tests
@@ -76,5 +78,11 @@ namespace sinkien.IBAN4Net.Tests
             Assert.AreEqual( "CZE", entry.Alpha3 );
         }
 
+        [TestMethod]
+        public void GetAvailableCountryCodes()
+        {
+            IEnumerable<CountryCodeEntry> entries = CountryCode.GetCountryCodes();
+            Assert.AreEqual(251, entries.Count());
+        }
     }
 }
