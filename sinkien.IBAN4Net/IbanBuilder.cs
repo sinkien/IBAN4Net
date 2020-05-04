@@ -37,6 +37,7 @@ namespace sinkien.IBAN4Net
         private string _accountNumber = "";        
         private string _ownerAccountType = "";
         private string _identificationNumber = "";
+        private string _balanceAccountNumber = "";
 
         private bool _enableAutopadding = false;
 
@@ -153,6 +154,18 @@ namespace sinkien.IBAN4Net
         }
 
         /// <summary>
+        /// Sets iban's balance account number
+        /// Occurs in Belarus's ibans.
+        /// </summary>
+        /// <param name="balanceAccountNumber">Balance account number string</param>
+        /// <returns></returns>
+        public IbanBuilder BalanceAccountNumber(string balanceAccountNumber)
+        {
+            this._balanceAccountNumber = balanceAccountNumber;
+            return this;
+        }
+
+        /// <summary>
         /// Builds new IBAN instance. By default, Bank code, Account number prefix and Account number will be auto left-padded if they are shorter than 
         /// has to be (according to BBAN rules) and then the new generated IBAN will be validated .
         /// </summary>
@@ -238,6 +251,9 @@ namespace sinkien.IBAN4Net
                         break;
                     case BBanEntryType.BRANCH_CODE:
                         sb.Append( _branchCode );                        
+                        break;
+                    case BBanEntryType.BALANCE_ACCOUNT_NUMBER:
+                        sb.Append(_balanceAccountNumber);
                         break;
                     case BBanEntryType.ACCOUNT_NUMBER_PREFIX:
                         reformatAccountNumberPrefix( entry.Length );

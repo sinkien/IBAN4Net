@@ -64,35 +64,33 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("AZ", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.AccountNumber(20, "c")));
 
-            _bbanStructures.Add("BH", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.AccountNumber(14, "c")));
-
-            _bbanStructures.Add("BE", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(7, "n"),
-                                                            BBanEntry.NationalCheckDigit(2, "n")));
-
             _bbanStructures.Add("BA", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.BranchCode(3, "n"),
                                                             BBanEntry.AccountNumber(8, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
+            
+            _bbanStructures.Add("BE", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                            BBanEntry.AccountNumber(7, "n"),
+                                                            BBanEntry.NationalCheckDigit(2, "n")));
+            
+            _bbanStructures.Add("BG", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.BranchCode(4, "n"),
+                                                            BBanEntry.AccountType(2, "n"),
+                                                            BBanEntry.AccountNumber(8, "c")));
+
+            _bbanStructures.Add("BH", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.AccountNumber(14, "c")));
 
             _bbanStructures.Add("BR", new BBanStructure(BBanEntry.BankCode(8, "n"),
                                                             BBanEntry.BranchCode(5, "n"),
                                                             BBanEntry.AccountNumber(10, "n"),
                                                             BBanEntry.AccountType(1, "a"),
                                                             BBanEntry.OwnerAccountNumber(1, "c")));
+                        
+            _bbanStructures.Add("CH", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                           BBanEntry.AccountNumber(12, "c")));
 
-            _bbanStructures.Add("BG", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.BranchCode(4, "n"),
-                                                            BBanEntry.AccountType(2, "n"),
-                                                            BBanEntry.AccountNumber(8, "c")));
-
-            // since 2017
-            _bbanStructures.Add("BY", new BBanStructure(BBanEntry.BankCode(4, "c"),
-                                                            BBanEntry.BalanceAccountNumber(4, "n"),
-                                                            BBanEntry.AccountNumber(16, "n")));
-
-            _bbanStructures.Add("CR", new BBanStructure(BBanEntry.BankCode(3, "n"),
+            _bbanStructures.Add("CR", new BBanStructure(BBanEntry.BankCode(4, "n"),
                                                             BBanEntry.AccountNumber(14, "n")));
 
             _bbanStructures.Add("CY", new BBanStructure(BBanEntry.BankCode(3, "n"),
@@ -115,20 +113,21 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("EE", new BBanStructure(BBanEntry.BankCode(2, "n"),
                                                             BBanEntry.BranchCode(2, "n"),
                                                             BBanEntry.AccountNumber(11, "n"),
-                                                            BBanEntry.NationalCheckDigit(1, "n")));
+                                                            BBanEntry.NationalCheckDigit(1, "n")));            
 
             _bbanStructures.Add("ES", new BBanStructure(BBanEntry.BankCode(4, "n"),
                                                             BBanEntry.BranchCode(4, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n"),
                                                             BBanEntry.AccountNumber(10, "n")));
-
-            _bbanStructures.Add("FO", new BBanStructure(BBanEntry.BankCode(4, "n"),
-                                                            BBanEntry.AccountNumber(9, "n"),
-                                                            BBanEntry.NationalCheckDigit(1, "n")));
-
-            _bbanStructures.Add("FI", new BBanStructure(BBanEntry.BankCode(6, "n"),
+            //Bank code is 3 and account number 10 + 1 check digit (11)
+            _bbanStructures.Add("FI", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                            BBanEntry.BranchCode(3, "n"),
                                                             BBanEntry.AccountNumber(7, "n"),
                                                             BBanEntry.NationalCheckDigit(1, "n")));
+
+            _bbanStructures.Add("FO", new BBanStructure(BBanEntry.BankCode(4, "n"),
+                                                           BBanEntry.AccountNumber(9, "n"),
+                                                           BBanEntry.NationalCheckDigit(1, "n")));
 
             _bbanStructures.Add("FR", new BBanStructure(BBanEntry.BankCode(5, "n"),
                                                             BBanEntry.BranchCode(5, "n"),
@@ -161,16 +160,8 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("HU", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.BranchCode(4, "n"),
                                                             BBanEntry.AccountNumber(16, "n"),
-                                                            BBanEntry.NationalCheckDigit(1, "n")));
-
-            _bbanStructures.Add("CH", new BBanStructure(BBanEntry.BankCode(5, "n"),
-                                                            BBanEntry.AccountNumber(12, "c")));
-
-            _bbanStructures.Add("IS", new BBanStructure(BBanEntry.BankCode(4, "n"),
-                                                            BBanEntry.BranchCode(2, "n"),
-                                                            BBanEntry.AccountNumber(6, "n"),
-                                                            BBanEntry.IdentificationNumber(10, "n")));
-
+                                                            BBanEntry.NationalCheckDigit(1, "n")));           
+            
             _bbanStructures.Add("IE", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.BranchCode(6, "n"),
                                                             BBanEntry.AccountNumber(8, "n")));
@@ -179,27 +170,23 @@ namespace SinKien.IBAN4Net
                                                             BBanEntry.BranchCode(3, "n"),
                                                             BBanEntry.AccountNumber(13, "n")));
 
-            _bbanStructures.Add("IR", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(19, "n")));
-
+            //account number should be 18 and no brach code
+            _bbanStructures.Add("IS", new BBanStructure(BBanEntry.BankCode(4, "n"),
+                                                            BBanEntry.BranchCode(2, "n"),
+                                                            BBanEntry.AccountNumber(6, "n"),
+                                                            BBanEntry.IdentificationNumber(10, "n")));
+           
             _bbanStructures.Add("IT", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"),
                                                             BBanEntry.BankCode(5, "n"),
                                                             BBanEntry.BranchCode(5, "n"),
                                                             BBanEntry.AccountNumber(12, "c")));
 
-            _bbanStructures.Add("JO", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.BranchCode(4, "n"),
-                                                            BBanEntry.AccountNumber(18, "c")));
-
-            _bbanStructures.Add("KZ", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(13, "c")));
-
             _bbanStructures.Add("KW", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.AccountNumber(22, "c")));
 
-            _bbanStructures.Add("LV", new BBanStructure(BBanEntry.BankCode(4, "a"),
+            _bbanStructures.Add("KZ", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(13, "c")));
-
+                        
             _bbanStructures.Add("LB", new BBanStructure(BBanEntry.BankCode(4, "n"),
                                                             BBanEntry.AccountNumber(20, "c")));
 
@@ -212,40 +199,39 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("LU", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(13, "c")));
 
-            // MG is same as FR (according to Nordea's list)
-            _bbanStructures.Add("MG", new BBanStructure(BBanEntry.BankCode(5, "n"),
-                                                            BBanEntry.BranchCode(5, "n"),
-                                                            BBanEntry.AccountNumber(11, "c"),
+            _bbanStructures.Add("LV", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.AccountNumber(13, "c")));
+
+            _bbanStructures.Add("MC", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                           BBanEntry.BranchCode(5, "n"),
+                                                           BBanEntry.AccountNumber(11, "c"),
+                                                           BBanEntry.NationalCheckDigit(2, "n")));
+
+            _bbanStructures.Add("MD", new BBanStructure(BBanEntry.BankCode(2, "c"),
+                                                        BBanEntry.AccountNumber(18, "c")));
+
+            _bbanStructures.Add("ME", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                            BBanEntry.AccountNumber(13, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
+                       
 
             _bbanStructures.Add("MK", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(10, "c"),
+                                                            BBanEntry.NationalCheckDigit(2, "n")));
+            
+            _bbanStructures.Add("MR", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                            BBanEntry.BranchCode(5, "n"),
+                                                            BBanEntry.AccountNumber(11, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
 
             _bbanStructures.Add("MT", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.BranchCode(5, "n"),
                                                             BBanEntry.AccountNumber(18, "c")));
 
-            _bbanStructures.Add("MR", new BBanStructure(BBanEntry.BankCode(5, "n"),
-                                                            BBanEntry.BranchCode(5, "n"),
-                                                            BBanEntry.AccountNumber(11, "n"),
-                                                            BBanEntry.NationalCheckDigit(2, "n")));
-
+            
             _bbanStructures.Add("MU", new BBanStructure(BBanEntry.BankCode(6, "c"),
                                                             BBanEntry.BranchCode(2, "n"),
-                                                            BBanEntry.AccountNumber(18, "c")));
-
-            _bbanStructures.Add("MD", new BBanStructure(BBanEntry.BankCode(2, "c"),
-                                                        BBanEntry.AccountNumber(18, "c")));
-
-            _bbanStructures.Add("MC", new BBanStructure(BBanEntry.BankCode(5, "n"),
-                                                            BBanEntry.BranchCode(5, "n"),
-                                                            BBanEntry.AccountNumber(11, "c"),
-                                                            BBanEntry.NationalCheckDigit(2, "n")));
-
-            _bbanStructures.Add("ME", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(13, "n"),
-                                                            BBanEntry.NationalCheckDigit(2, "n")));
+                                                            BBanEntry.AccountNumber(18, "c")));           
 
             _bbanStructures.Add("NL", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.AccountNumber(10, "n")));
@@ -256,32 +242,46 @@ namespace SinKien.IBAN4Net
 
             _bbanStructures.Add("PK", new BBanStructure(BBanEntry.BankCode(4, "c"),
                                                             BBanEntry.AccountNumber(16, "n")));
+                        
+            _bbanStructures.Add("PL", new BBanStructure(BBanEntry.BankCode(7, "n"),
+                                                            BBanEntry.BranchCode(0, "n"),
+                                                            BBanEntry.NationalCheckDigit(1, "n"),
+                                                            BBanEntry.AccountNumber(16, "n")));
 
             _bbanStructures.Add("PS", new BBanStructure(BBanEntry.BankCode(4, "a"),
                                                             BBanEntry.AccountNumber(21, "c")));
-
-            _bbanStructures.Add("PL", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.BranchCode(4, "n"),
-                                                            BBanEntry.NationalCheckDigit(1, "n"),
-                                                            BBanEntry.AccountNumber(16, "n")));
 
             _bbanStructures.Add("PT", new BBanStructure(BBanEntry.BankCode(4, "n"),
                                                             BBanEntry.BranchCode(4, "n"),
                                                             BBanEntry.AccountNumber(11, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
-
-            _bbanStructures.Add("QA", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.AccountNumber(21, "c")));
+                        
+            _bbanStructures.Add("RO", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.AccountNumber(16, "c")));
 
             _bbanStructures.Add("RS", new BBanStructure(BBanEntry.BankCode(3, "n"),
                                                             BBanEntry.AccountNumber(13, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
-            _bbanStructures.Add("RO", new BBanStructure(BBanEntry.BankCode(4, "a"),
-                                                            BBanEntry.AccountNumber(16, "c")));
 
-            _bbanStructures.Add("TL", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(14, "n"),
+            _bbanStructures.Add("SA", new BBanStructure(BBanEntry.BankCode(2, "n"),
+                                                            BBanEntry.AccountNumber(18, "c")));
+
+            _bbanStructures.Add("SE", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                           BBanEntry.AccountNumber(17, "n")));            
+
+            _bbanStructures.Add("SI", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                            BBanEntry.BranchCode(0, "n"),
+                                                            BBanEntry.AccountNumber(8, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
+
+            _bbanStructures.Add("SK", new BBanStructure(BBanEntry.BankCode(4, "n"),
+                                                            BBanEntry.AccountNumberPrefix(6, "n"),
+                                                            BBanEntry.AccountNumber(10, "n")));
+
+            _bbanStructures.Add("SM", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"),
+                                                          BBanEntry.BankCode(5, "n"),
+                                                          BBanEntry.BranchCode(5, "n"),
+                                                          BBanEntry.AccountNumber(12, "c")));
 
             _bbanStructures.Add("TN", new BBanStructure(BBanEntry.BankCode(2, "n"),
                                                             BBanEntry.BranchCode(3, "n"),
@@ -290,37 +290,82 @@ namespace SinKien.IBAN4Net
             _bbanStructures.Add("TR", new BBanStructure(BBanEntry.BankCode(5, "n"),
                                                             BBanEntry.NationalCheckDigit(1, "c"),
                                                             BBanEntry.AccountNumber(16, "c")));
-
-            _bbanStructures.Add("SM", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"),
-                                                            BBanEntry.BankCode(5, "n"),
-                                                            BBanEntry.BranchCode(5, "n"),
-                                                            BBanEntry.AccountNumber(12, "c")));
-
-            _bbanStructures.Add("SA", new BBanStructure(BBanEntry.BankCode(2, "n"),
-                                                            BBanEntry.AccountNumber(18, "c")));
-
-            _bbanStructures.Add("SK", new BBanStructure(BBanEntry.BankCode(4, "n"),
-                                                            BBanEntry.AccountNumberPrefix(6, "n"),
-                                                            BBanEntry.AccountNumber(10, "n")));
-
-            _bbanStructures.Add("SI", new BBanStructure(BBanEntry.BankCode(2, "n"),
-                                                            BBanEntry.BranchCode(3, "n"),
-                                                            BBanEntry.AccountNumber(8, "n"),
-                                                            BBanEntry.NationalCheckDigit(2, "n")));
-
-            _bbanStructures.Add("SE", new BBanStructure(BBanEntry.BankCode(3, "n"),
-                                                            BBanEntry.AccountNumber(17, "n")));
-
-            _bbanStructures.Add("UA", new BBanStructure(BBanEntry.BankCode(6, "n"),
-                                                            BBanEntry.AccountNumber(19, "n")));
-
+           
+            
             _bbanStructures.Add("VG", new BBanStructure(BBanEntry.BankCode(4, "c"),
                                                             BBanEntry.AccountNumber(16, "n")));
+            
+            //no branch code is defined
+            _bbanStructures.Add("JO", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.BranchCode(4, "n"),
+                                                            BBanEntry.AccountNumber(18, "c")));
 
+            _bbanStructures.Add("QA", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                            BBanEntry.AccountNumber(21, "c")));
+            //defined as account number 16 but starting at pos. 5 after checksum, i.e. 
+            //swift account number definition includes the bank code (2) and branch code(2)
             _bbanStructures.Add("XK", new BBanStructure(BBanEntry.BankCode(2, "n"),
                                                             BBanEntry.BranchCode(2, "n"),
                                                             BBanEntry.AccountNumber(10, "n"),
                                                             BBanEntry.NationalCheckDigit(2, "n")));
+            
+            _bbanStructures.Add("TL", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                           BBanEntry.AccountNumber(14, "n"),
+                                                           BBanEntry.NationalCheckDigit(2, "n")));
+
+            //defined as account number 24 (was 9)
+            _bbanStructures.Add("LC", new BBanStructure(BBanEntry.BankCode(4, "a"),                                                           
+                                                           BBanEntry.AccountNumber(24, "c")));
+
+
+            _bbanStructures.Add("UA", new BBanStructure(BBanEntry.BankCode(6, "n"),
+                                                            BBanEntry.AccountNumber(19, "n")));
+
+            
+            _bbanStructures.Add("ST", new BBanStructure(BBanEntry.BankCode(4, "n"),
+                                                            BBanEntry.BranchCode(4, "n"),
+                                                            BBanEntry.AccountNumber(13, "n")));
+            
+            _bbanStructures.Add("SC", new BBanStructure(BBanEntry.BankCode(6, "c"),
+                                                           BBanEntry.BranchCode(2, "n"),
+                                                           BBanEntry.AccountNumber(19, "c")));
+
+            _bbanStructures.Add("IQ", new BBanStructure(BBanEntry.BankCode(4, "a"),
+                                                           BBanEntry.BranchCode(3, "n"),
+                                                           BBanEntry.AccountNumber(12, "n")));
+            //defined as account number 20 was (9)
+            _bbanStructures.Add("SV", new BBanStructure(BBanEntry.BankCode(4, "a"),                                                           
+                                                           BBanEntry.AccountNumber(20, "n")));
+
+
+            // since 2017
+            _bbanStructures.Add("BY", new BBanStructure(BBanEntry.BankCode(4, "c"),
+                                                            BBanEntry.BalanceAccountNumber(4, "n"),
+                                                            BBanEntry.AccountNumber(16, "c")));
+            
+            _bbanStructures.Add("VA", new BBanStructure(BBanEntry.BankCode(3, "n"),                                                           
+                                                           BBanEntry.AccountNumber(15, "n")));
+
+            // MG is same as FR (according to Nordea's list)
+            _bbanStructures.Add("MG", new BBanStructure(BBanEntry.BankCode(5, "n"),
+                                                            BBanEntry.BranchCode(5, "n"),
+                                                            BBanEntry.AccountNumber(11, "c"),
+                                                            BBanEntry.NationalCheckDigit(2, "n")));
+
+            /* NOT FOUND IN SWIFT */
+            _bbanStructures.Add("IR", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                            BBanEntry.AccountNumber(19, "n")));
+
+            _bbanStructures.Add("EG", new BBanStructure(BBanEntry.BankCode(4, "n"),
+                                                            BBanEntry.BranchCode(4, "n"),
+                                                            BBanEntry.AccountNumber(17, "n")));
+
+            _bbanStructures.Add("AX", new BBanStructure(BBanEntry.BankCode(3, "n"),
+                                                            BBanEntry.BranchCode(3, "n"),
+                                                            BBanEntry.AccountNumber(7, "n"),
+                                                            BBanEntry.NationalCheckDigit(1, "n")));
+
+
         }
 
         /// <summary>

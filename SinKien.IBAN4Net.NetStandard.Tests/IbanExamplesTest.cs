@@ -6,6 +6,18 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
     [TestClass]
     public class IbanExamplesTest
     {
+
+        [TestMethod]
+        public void AllSampleValidIBANsShouldWork()
+        {
+            var IBANs = System.IO.File.ReadAllLines(System.IO.Path.Combine("SampleData", "SampleValidIBANs.txt"));
+            foreach (var iban in IBANs)
+            {
+                IbanUtils.IsValid(iban, out IbanFormatViolation result);
+                Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION, $"{iban}: {result.ToString()}");
+            }
+        }
+
         [TestMethod]
         public void Belarus_ValidIbanShouldPass()
         {
