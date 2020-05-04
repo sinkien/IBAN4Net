@@ -270,5 +270,6 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
                 Assert.AreEqual(IbanFormatViolation.BANK_CODE_TOO_SHORT, iex.FormatViolation);
             }
         }
+
     }
 }

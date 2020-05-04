@@ -582,13 +582,11 @@ namespace SinKien.IBAN4Net
             return (validationResult == IbanFormatViolation.NO_VIOLATION);
         }
 
+        private static char[] letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         private static int calculateMod(string iban)
         {
             string reformattedIban = GetBBan(iban) + GetCountryCodeAndCheckDigit(iban);
             double total = 0;
-
-            // a little java's workaround ;)
-            char[] letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
             for (int i = 0; i < reformattedIban.Length; i++)
             {
