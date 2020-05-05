@@ -4,7 +4,7 @@
     <TargetFrameworks>net45;netstandard1.2;netstandard1.4;netstandard2.0</TargetFrameworks>
     <RootNamespace>SinKien.IBAN4Net</RootNamespace>
     <AssemblyName>SinKien.IBAN4Net</AssemblyName>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Authors>Vaclav Beca</Authors>
     <Description>IBAN4Net is a .NET Standard compliant (1.2, 1.4, 2.0) library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).</Description>
     <PackageProjectUrl>https://github.com/sinkien/IBAN4Net</PackageProjectUrl>
