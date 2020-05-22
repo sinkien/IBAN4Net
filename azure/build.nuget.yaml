@@ -47,7 +47,7 @@ steps:
       verbosityPack: Minimal
   
   - script: |
-     dotnet nuget push -k $(nuget.apiKey) -s $(nuget.source) $(Build.ArtifactStagingDirectory)\SinKien.IBAN4Net.1.0.0.$(Build.BuildId).nupkg
-     dotnet nuget push -k $(nuget.apiKey) -s $(nuget.source) $(Build.ArtifactStagingDirectory)\SinKien.IBAN4Net.1.0.0.$(Build.BuildId).symbols.nupkg
+     dotnet nuget push -k $(nuget.apiKey) -s $(nuget.source) $(Build.ArtifactStagingDirectory)\SinKien.IBAN4Net.2.0.0.$(Build.BuildId).nupkg
+     dotnet nuget push -k $(nuget.apiKey) -s $(nuget.source) $(Build.ArtifactStagingDirectory)\SinKien.IBAN4Net.2.0.0.$(Build.BuildId).symbols.nupkg
     displayName: 'dotnet push'
   
