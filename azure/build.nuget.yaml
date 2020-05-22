@@ -6,7 +6,7 @@ variables:
   - name: configuration
     value: Release
   - name: project
-    value: "SinKien.IBAN4Net.NetStandard\SinKien.IBAN4Net.NetStandard.csproj"
+    value: "SinKien.IBAN4Net.NetStandard\\SinKien.IBAN4Net.NetStandard.csproj"
 trigger:
   branches:
     include:
