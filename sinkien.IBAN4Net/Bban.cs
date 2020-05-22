@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace sinkien.IBAN4Net
+namespace SinKien.IBAN4Net
 {
     /// <summary>
     /// Basic Bank Account Number.
@@ -364,8 +364,39 @@ namespace sinkien.IBAN4Net
                                                             BBanEntry.BranchCode(3, "n"),
                                                             BBanEntry.AccountNumber(7, "n"),
                                                             BBanEntry.NationalCheckDigit(1, "n")));
+            
+            //Algeria
+            _bbanStructures.Add("DZ", new BBanStructure(BBanEntry.AccountNumber(20, "n")));
+            
+            //Angola
+            _bbanStructures.Add("AO", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
+            
+            //Benin
+            _bbanStructures.Add("BJ", new BBanStructure(BBanEntry.BankCode(1, "a"),
+                BBanEntry.AccountNumber(23, "n")));
+            
+            //Burkina Faso
+            _bbanStructures.Add("BF", new BBanStructure(BBanEntry.AccountNumber(23, "n")));
+            
+            //Burundi
+            _bbanStructures.Add("BI", new BBanStructure(BBanEntry.AccountNumber(12, "n")));
+            
+            //Cameroon
+            _bbanStructures.Add("CM", new BBanStructure(BBanEntry.AccountNumber(23, "n")));
+            
+            //Cape Verde
+            _bbanStructures.Add("CV", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
 
+            //Mali
+            _bbanStructures.Add("ML", new BBanStructure(BBanEntry.BankCode(1, "a"),
+                BBanEntry.AccountNumber(23, "n")));
 
+            //Mozambique
+            _bbanStructures.Add("MZ", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
+
+            //Senegal
+            _bbanStructures.Add("SN", new BBanStructure(BBanEntry.BankCode(1, "a"),
+                BBanEntry.AccountNumber(23, "n")));
         }
 
         /// <summary>
@@ -399,7 +430,7 @@ namespace sinkien.IBAN4Net
         {            
             BBanStructure result = null;
 
-            if (!string.IsNullOrEmpty(alpha2Code) && alpha2Code.Length == 2)
+            if (alpha2Code?.Length == 2)
             {                
                 if (_bbanStructures.ContainsKey(alpha2Code.ToUpper()))
                 {
