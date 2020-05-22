@@ -15,6 +15,11 @@ pool:
     name: Default
   
 steps:
+  - task: UseDotNet@2
+    displayName: 'use dotnet sdk@$(dotnet.version)'
+    inputs:
+      packageType: 'sdk'
+      version: '$(dotnet.version)'
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
     inputs:
