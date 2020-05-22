@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SinKien.IBAN4Net
+namespace sinkien.IBAN4Net
 {
     /// <summary>
     /// Basic Bank Account Number.
