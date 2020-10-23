@@ -60,12 +60,6 @@
     <Compile Include="IbanTest.cs" />
     <Compile Include="BbanTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\sinkien.IBAN4Net\sinkien.IBAN4Net.csproj">
-      <Project>{5e6fef7d-8012-45b0-bd40-f00446a159d5}</Project>
-      <Name>sinkien.IBAN4Net</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

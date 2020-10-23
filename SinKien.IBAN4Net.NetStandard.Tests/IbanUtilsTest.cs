@@ -1,6 +1,6 @@
 ﻿/*
  * IBAN4Net
- * Copyright 2018 Vaclav Beca[sinkien]
+ * Copyright 2020 Vaclav Beca [sinkien]
  *
  * Based on Artur Mkrtchyan's project IBAN4j (https://github.com/arturmkrtchyan/iban4j).
  *

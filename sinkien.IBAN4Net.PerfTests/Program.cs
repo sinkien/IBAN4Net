@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace sinkien.IBAN4Net.PerfTests
+namespace SinKien.IBAN4Net.PerfTests
 {
     public class Program
     {

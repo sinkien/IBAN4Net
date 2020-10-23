@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2047
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sinkien.IBAN4Net", "sinkien.IBAN4Net\sinkien.IBAN4Net.csproj", "{5E6FEF7D-8012-45B0-BD40-F00446A159D5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sinkien.IBAN4Net.Tests", "sinkien.IBAN4Net.Tests\sinkien.IBAN4Net.Tests.csproj", "{9971C919-4982-42BD-9D47-6CD7239DE187}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SinKien.IBAN4Net.NetStandard", "SinKien.IBAN4Net.NetStandard\SinKien.IBAN4Net.NetStandard.csproj", "{AAD8EEFE-5C6D-458D-8AFD-CEAC96CE22F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinKien.IBAN4Net.NetStandard.Tests.Net45", "SinKien.IBAN4Net.NetStandard.Tests\SinKien.IBAN4Net.NetStandard.Tests.Net45.csproj", "{FC1CAF73-0B98-4916-A489-C5A3F7B9A441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sinkien.IBAN4Net.PerfTests", "sinkien.IBAN4Net.PerfTests\sinkien.IBAN4Net.PerfTests.csproj", "{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SinKien.IBAN4Net.PerfTests", "SinKien.IBAN4Net.PerfTests\SinKien.IBAN4Net.PerfTests.csproj", "{62A0EAFC-39F2-4999-8379-DEB5DD4FF99F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E6FEF7D-8012-45B0-BD40-F00446A159D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E6FEF7D-8012-45B0-BD40-F00446A159D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E6FEF7D-8012-45B0-BD40-F00446A159D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E6FEF7D-8012-45B0-BD40-F00446A159D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9971C919-4982-42BD-9D47-6CD7239DE187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9971C919-4982-42BD-9D47-6CD7239DE187}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9971C919-4982-42BD-9D47-6CD7239DE187}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9971C919-4982-42BD-9D47-6CD7239DE187}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AAD8EEFE-5C6D-458D-8AFD-CEAC96CE22F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AAD8EEFE-5C6D-458D-8AFD-CEAC96CE22F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAD8EEFE-5C6D-458D-8AFD-CEAC96CE22F4}.Release|Any CPU.ActiveCfg = Release|Any CPU

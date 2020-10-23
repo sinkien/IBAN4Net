@@ -3,7 +3,7 @@ using System.Threading;
 using BenchmarkDotNet.Attributes;
 using SinKien.IBAN4Net;
 
-namespace sinkien.IBAN4Net.PerfTests
+namespace SinKien.IBAN4Net.PerfTests
 {
     [MemoryDiagnoser]
     public class BbanBenchmarks
