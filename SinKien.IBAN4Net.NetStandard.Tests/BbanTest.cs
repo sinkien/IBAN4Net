@@ -20,13 +20,29 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
 {
+
     [TestClass]
     public class BbanTest
     {
+        [TestMethod]
+        public void GetBbanAndChangeShouldNotChangeOtherBban()
+        {
+            int entryCount = 0;
+            BBanStructure entry = Bban.GetStructureForCountry("CY");
+            Assert.IsNotNull(entry);
+            entryCount = entry.Entries.Count();
+            entry.Entries.RemoveAt(1);
+            BBanStructure newEntry = Bban.GetStructureForCountry("CY");
+            Assert.IsNotNull(newEntry);
+            Assert.AreEqual(entryCount, newEntry.Entries.Count());
+
+        }
+
         [TestMethod]
         public void BbanIsSupportedEntryShouldReturnFalseForUnsupportedEntryType()
         {

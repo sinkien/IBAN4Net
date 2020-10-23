@@ -32,9 +32,9 @@ namespace sinkien.IBAN4Net
         /// ISO 3166-1
         ///         
         /// </summary>
-        private SortedDictionary<string, CountryCodeEntry> _alpha3Map = new SortedDictionary<string, CountryCodeEntry>();
+        private static SortedDictionary<string, CountryCodeEntry> _alpha3Map = new SortedDictionary<string, CountryCodeEntry>();
 
-        public CountryCode ()
+        static CountryCode ()
         {
             loadMap();
         }
@@ -47,17 +47,16 @@ namespace sinkien.IBAN4Net
         public static CountryCodeEntry GetCountryCode (string code)
         {
             CountryCodeEntry result = null;
-            CountryCode cc = new CountryCode();
-
+            
             if (!string.IsNullOrEmpty( code ))
             {
                 switch (code.Length)
                 {
                     case 2:
-                        result = cc.getByAlpha2( code.ToUpper() );
+                        result = getByAlpha2( code.ToUpper() );
                         break;
                     case 3:
-                        result = cc.getByAlpha3( code.ToUpper() );
+                        result = getByAlpha3( code.ToUpper() );
                         break;
                 }
             }
@@ -65,34 +64,34 @@ namespace sinkien.IBAN4Net
             return result;
         }
 
-        private  CountryCodeEntry getByAlpha2 (string code)
-        {
-            CountryCodeEntry result = null;
-
+        private static CountryCodeEntry getByAlpha2(string code)
+        {            
             if (_alpha3Map != null)
             {
                 if (_alpha3Map.ContainsKey( code ))
                 {
-                    result = _alpha3Map[code];
+                    return _alpha3Map[code].Clone();
                 }
             }
-
-            return result;
+            
+            return null;
         }
 
-        private CountryCodeEntry getByAlpha3 (string code)
+        private static CountryCodeEntry getByAlpha3(string code)
         {
             CountryCodeEntry result = null;
 
             if (_alpha3Map != null)
             {
-                result = _alpha3Map.Values.Where( x => x.Alpha3.Equals( code ) ).SingleOrDefault();
+                result =_alpha3Map.Values.Where( x => x.Alpha3.Equals(code)).SingleOrDefault();
+                if (result != null)
+                    result = result.Clone();
             }
 
             return result;
         }
 
-        private void loadMap ()
+        private static void loadMap ()
         {
             _alpha3Map.Add( "AF", new CountryCodeEntry() { Alpha2 = "AF", Alpha3 = "AFG", CountryName = "Afghanistan" } );
             _alpha3Map.Add( "AX", new CountryCodeEntry() { Alpha2 = "AX", Alpha3 = "ALA", CountryName = "Åland Islands" } );
@@ -369,7 +368,7 @@ namespace sinkien.IBAN4Net
         /// English abbreviation of country name
         /// </summary>
         public string CountryName { get; set; }
-
+                
         public override int GetHashCode ()
         {
             return Alpha2.GetHashCode() + Alpha3.GetHashCode() + CountryName.GetHashCode();            
@@ -384,6 +383,11 @@ namespace sinkien.IBAN4Net
             }
 
             return false;
+        }
+
+        public CountryCodeEntry Clone()
+        {
+            return new CountryCodeEntry() { Alpha2 = this.Alpha2, Alpha3 = this.Alpha3, CountryName = this.CountryName };
         }
     }
 }

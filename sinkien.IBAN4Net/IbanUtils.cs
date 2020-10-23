@@ -214,7 +214,12 @@ namespace sinkien.IBAN4Net
         /// <returns>IBAN's account number as string</returns>
         public static string GetAccountNumber (string iban) => extractBbanEntry( iban, BBanEntryType.ACCOUNT_NUMBER );
 
-
+        /// <summary>
+        /// Returns IBAN's balance account number
+        /// </summary>
+        /// <param name="iban">IBAN string value</param>
+        /// <returns>IBAN's balance account number as string (if it is present)</returns>
+        public static string GetBalanceAccountNumber(string iban) => extractBbanEntry(iban, BBanEntryType.BALANCE_ACCOUNT_NUMBER);
         /// <summary>
         /// Returns IBAN's account number prefix      
         /// </summary>

@@ -33,7 +33,8 @@ namespace sinkien.IBAN4Net
         NATIONAL_CHECK_DIGIT,
         ACCOUNT_TYPE,
         OWNER_ACCOUNT_NUMBER,
-        IDENTIFICATION_NUMBER
+        IDENTIFICATION_NUMBER,
+        BALANCE_ACCOUNT_NUMBER
     }
 
     /// <summary>

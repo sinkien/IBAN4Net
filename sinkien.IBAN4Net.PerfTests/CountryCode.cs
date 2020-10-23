@@ -24,20 +24,20 @@ using System.Linq;
 
 namespace SinKien.IBAN4Net
 {
-    public class CountryCode
+    public class CountryCodePrev
     {
-        static CountryCode()
-        {
-            loadMap();
-        }
         /// <summary>
         /// A list of all supported country codes
         /// ISO 3166-1
         ///         
         /// </summary>
-        private static SortedDictionary<string, CountryCodeEntry> _alpha3Map = new SortedDictionary<string, CountryCodeEntry>();
+        private SortedDictionary<string, CountryCodeEntry> _alpha3Map = new SortedDictionary<string, CountryCodeEntry>();
 
-       
+        public CountryCodePrev()
+        {
+            loadMap();
+        }
+
         /// <summary>
         /// Gets CountryCode object from map
         /// </summary>
@@ -46,16 +46,17 @@ namespace SinKien.IBAN4Net
         public static CountryCodeEntry GetCountryCode(string code)
         {
             CountryCodeEntry result = null;
-            
+            CountryCodePrev cc = new CountryCodePrev();
+
             if (!string.IsNullOrEmpty(code))
             {
                 switch (code.Length)
                 {
                     case 2:
-                        result = getByAlpha2(code.ToUpper());
+                        result = cc.getByAlpha2(code.ToUpper());
                         break;
                     case 3:
-                        result = getByAlpha3(code.ToUpper());
+                        result = cc.getByAlpha3(code.ToUpper());
                         break;
                 }
             }
@@ -63,34 +64,34 @@ namespace SinKien.IBAN4Net
             return result;
         }
 
-        private static CountryCodeEntry getByAlpha2(string code)
+        private CountryCodeEntry getByAlpha2(string code)
         {
+            CountryCodeEntry result = null;
+
             if (_alpha3Map != null)
             {
                 if (_alpha3Map.ContainsKey(code))
                 {
-                    return _alpha3Map[code].Clone();
+                    result = _alpha3Map[code];
                 }
             }
 
-            return null;
+            return result;
         }
 
-        private static CountryCodeEntry getByAlpha3(string code)
+        private CountryCodeEntry getByAlpha3(string code)
         {
             CountryCodeEntry result = null;
 
             if (_alpha3Map != null)
             {
                 result = _alpha3Map.Values.Where(x => x.Alpha3.Equals(code)).SingleOrDefault();
-                if (result != null)
-                    result = result.Clone();
             }
 
             return result;
         }
 
-        private static void loadMap()
+        private void loadMap()
         {
             _alpha3Map.Add("AF", new CountryCodeEntry() { Alpha2 = "AF", Alpha3 = "AFG", CountryName = "Afghanistan" });
             _alpha3Map.Add("AX", new CountryCodeEntry() { Alpha2 = "AX", Alpha3 = "ALA", CountryName = "Åland Islands" });
@@ -346,43 +347,5 @@ namespace SinKien.IBAN4Net
         }
     }
 
-    /// <summary>
-    /// CountryCode map item
-    /// </summary>
-    public class CountryCodeEntry
-    {
-        /// <summary>
-        /// 2-letters code for country
-        /// ISO 3166-1 Alpha2
-        /// </summary>
-        public string Alpha2 { get; set; }
-
-        /// <summary>
-        /// 3-letters code for country
-        /// ISO 3166-1 Alpha3
-        /// </summary>
-        public string Alpha3 { get; set; }
-
-        /// <summary>       
-        /// English abbreviation of country name
-        /// </summary>
-        public string CountryName { get; set; }
-
-        public override int GetHashCode() =>  Alpha2.GetHashCode() + Alpha3.GetHashCode() + CountryName.GetHashCode();        
-
-        public override bool Equals(object obj)
-        {
-            if (obj is CountryCodeEntry)
-            {
-                CountryCodeEntry other = obj as CountryCodeEntry;
-                return Alpha2.Equals(other.Alpha2) & Alpha3.Equals(other.Alpha3) & CountryName.Equals(other.CountryName);
-            }
-
-            return false;
-        }
-        public CountryCodeEntry Clone()
-        {
-            return new CountryCodeEntry() { Alpha2 = this.Alpha2, Alpha3 = this.Alpha3, CountryName = this.CountryName };            
-        }
-    }
+   
 }
