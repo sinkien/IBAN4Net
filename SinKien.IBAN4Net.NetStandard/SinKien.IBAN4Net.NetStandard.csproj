@@ -4,16 +4,28 @@
     <TargetFrameworks>net45;netstandard1.2;netstandard1.4;netstandard2.0</TargetFrameworks>
     <RootNamespace>SinKien.IBAN4Net</RootNamespace>
     <AssemblyName>SinKien.IBAN4Net</AssemblyName>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <Authors>Vaclav Beca</Authors>
     <Description>IBAN4Net is a .NET Standard compliant (1.2, 1.4, 2.0) library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).</Description>
     <PackageProjectUrl>https://github.com/sinkien/IBAN4Net</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <Copyright>Copyright 2020 Vaclav Beca [sinkien]</Copyright>
     <PackageTags>iban, bic, iban4net</PackageTags>
     <RepositoryType>github</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/sinkien/IBAN4Net</RepositoryUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <AssemblyVersion>2.0.3.0</AssemblyVersion>
+    <FileVersion>2.0.3.0</FileVersion>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageId>IBAN4Net</PackageId>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

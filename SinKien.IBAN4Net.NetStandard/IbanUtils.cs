@@ -29,7 +29,9 @@ namespace SinKien.IBAN4Net
     /// IBAN Utilities
     /// </summary>
     public class IbanUtils
-    {        
+    {
+        private static char[] _letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
         /// <summary>
         /// Validation of IBAN string
         /// </summary>
@@ -582,7 +584,7 @@ namespace SinKien.IBAN4Net
             return (validationResult == IbanFormatViolation.NO_VIOLATION);
         }
 
-        private static char[] letters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+        
         private static int calculateMod(string iban)
         {
             string reformattedIban = GetBBan(iban) + GetCountryCodeAndCheckDigit(iban);
@@ -590,7 +592,7 @@ namespace SinKien.IBAN4Net
 
             for (int i = 0; i < reformattedIban.Length; i++)
             {
-                double numericValue = char.IsLetter(reformattedIban[i]) ? (10 + Array.IndexOf(letters, reformattedIban[i])) : char.GetNumericValue(reformattedIban[i]);
+                double numericValue = char.IsLetter(reformattedIban[i]) ? (10 + Array.IndexOf(_letters, reformattedIban[i])) : char.GetNumericValue(reformattedIban[i]);
                 if (numericValue < 0 || numericValue > 35)
                 {
                     throw new IbanFormatException($"Invalid character on position {i} = {numericValue}", IbanFormatViolation.IBAN_VALID_CHARACTERS, reformattedIban[i]);

@@ -37,7 +37,13 @@ namespace SinKien.IBAN4Net
         /// </summary>
         private static SortedDictionary<string, CountryCodeEntry> _alpha3Map = new SortedDictionary<string, CountryCodeEntry>();
 
-       
+
+        /// <summary>
+        /// Returns all defined country codes as IEnumerable
+        /// </summary>
+        /// <returns>IEnumerable of country codes</returns>
+        public static IEnumerable<CountryCodeEntry> GetCountryCodes() => _alpha3Map.Values.AsEnumerable();
+
         /// <summary>
         /// Gets CountryCode object from map
         /// </summary>

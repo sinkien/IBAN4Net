@@ -1,6 +1,8 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
@@ -113,6 +115,13 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
             CountryCodeEntry entry2 = CountryCode.GetCountryCode("DE");
 
             Assert.AreNotEqual(entry1.GetHashCode(), entry2.GetHashCode());
+        }
+
+        [TestMethod]
+        public void GetCountryCodesShouldReturnAllOfThem()
+        {
+            IEnumerable<CountryCodeEntry> entries = CountryCode.GetCountryCodes();
+            Assert.AreEqual(251, entries.Count());
         }
     }
 }
