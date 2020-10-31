@@ -18,6 +18,7 @@ Some of the differencies from the java project are:
 - Validation of IBAN and BIC can be done without exceptions (see examples)
 
 
+
 <b>You can get this library directly to your project from NuGet: <a href="https://www.nuget.org/packages/IBAN4Net/">https://www.nuget.org/packages/IBAN4Net/</a></b>
 
 
@@ -84,7 +85,11 @@ else
     // validationResult contains reason of unsuccessful validation
 }
 
+// Check if IBAN is from SEPA member country
+bool ibanFromSEPA = IbanUtils.IsFromSEPACountry("CZ5508000000001234567899"); // true
 
+// Check if IBAN is from SEPA Eurozone (uses EUR as currency) member country
+bool ibanWithEUR = IbanUtils.IsFromEurozoneSEPACountry("FI1410093000123458"); // true
 
 ```
 
@@ -128,6 +133,6 @@ else
 
 
 ### License
-Copyright 2015 Vaclav Beca [sinkien].
+Copyright 2020 Vaclav Beca [sinkien].
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
