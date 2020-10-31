@@ -1,5 +1,5 @@
 # IBAN4Net
-A port of Artur Mkrtchyan's IBAN4j project to .NET. Artur's project can be found <a href="https://github.com/arturmkrtchyan/iban4j" target="_blank">here</a>
+A port of Artur Mkrtchyan's IBAN4j project to .NET (netstandard). Artur's project can be found <a href="https://github.com/arturmkrtchyan/iban4j" target="_blank">here</a>
 
 IBAN4Net is a library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).
 
