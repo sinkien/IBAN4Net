@@ -37,7 +37,7 @@ namespace SinKien.IBAN4Net
         /// </summary>
         /// <param name="iban">IBAN string</param>
         /// <exception cref="IbanFormatException">Thrown when IBAN is invalid</exception>
-        /// <exception cref="UnsupportedCountryException">Thrown when INAB's country code is not supported</exception>
+        /// <exception cref="UnsupportedCountryException">Thrown when IBAN's country code is not supported</exception>
         /// <exception cref="InvalidCheckDigitException">Thrown when IBAN string contains invalid check digit</exception>
         public static void Validate(string iban)
         {
@@ -126,6 +126,20 @@ namespace SinKien.IBAN4Net
         /// <param name="alpha2Code">Alpha2 code for country</param>
         /// <returns>True if country code is supported, othewise false</returns>
         public static bool IsSupportedCountry(string alpha2Code) => (CountryCode.GetCountryCode(alpha2Code) != null) && (Bban.GetStructureForCountry(alpha2Code) != null);
+
+        /// <summary>
+        /// Checks whether IBAN belongs to country which is a memeber of SEPA
+        /// </summary>
+        /// <param name="iban">IBAN string</param>
+        /// <returns>True if country is SEPA member</returns>
+        public static bool IsFromSEPACountry(string iban) => !string.IsNullOrEmpty(iban) && (CountryCode.GetCountryCode(GetCountryCode(iban))?.IsSEPAMember ?? false);
+
+        /// <summary>
+        /// Checks whether IBAN belongs to country which is a memeber of SEPA Eurozone (country uses EUR as main currency)
+        /// </summary>
+        /// <param name="iban"></param>
+        /// <returns>True if country is SEPA Eurozone member</returns>
+        public static bool IsFromEurozoneSEPACountry(string iban) => !string.IsNullOrEmpty(iban) && (CountryCode.GetCountryCode(GetCountryCode(iban))?.IsUsingEuros ?? false);
 
         /// <summary>
         /// Returns IBAN length for the specified country

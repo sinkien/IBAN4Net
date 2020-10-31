@@ -3,11 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
 {
-    [TestClass]/*
+	[TestClass]/*
  * IBAN4Net
  * Copyright 2020 Vaclav Beca [sinkien]
  *
@@ -27,101 +28,123 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-    public class CountryCodeTest
-    {
-        [TestMethod]
-        public void GetCountryAndChangeShouldNotChangeOtherCountries()
-        {
-            string oldName;
-            CountryCodeEntry entry = CountryCode.GetCountryCode("CY");
-            Assert.IsNotNull(entry);
-            oldName = entry.CountryName;
-            entry.CountryName = "Change to this";
-            CountryCodeEntry newEntry = CountryCode.GetCountryCode("CY");
-            Assert.IsNotNull(newEntry);
-            Assert.AreEqual(oldName, newEntry.CountryName);
+	public class CountryCodeTest
+	{
+		[TestMethod]
+		public void GetCountryAndChangeShouldNotChangeOtherCountries()
+		{
+			string oldName;
+			CountryCodeEntry entry = CountryCode.GetCountryCode("CY");
+			Assert.IsNotNull(entry);
+			oldName = entry.CountryName;
+			entry.CountryName = "Change to this";
+			CountryCodeEntry newEntry = CountryCode.GetCountryCode("CY");
+			Assert.IsNotNull(newEntry);
+			Assert.AreEqual(oldName, newEntry.CountryName);
 
-        }
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithEmptyStringShouldReturnNullObject()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode(string.Empty);
-            Assert.IsNull(entry);
-        }
+		[TestMethod]
+		public void GetCountryCodeWithEmptyStringShouldReturnNullObject()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode(string.Empty);
+			Assert.IsNull(entry);
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWith4LetterCodeShouldReturnNullObject()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("XXXX");
-            Assert.IsNull(entry);
-        }
+		[TestMethod]
+		public void GetCountryCodeWith4LetterCodeShouldReturnNullObject()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("XXXX");
+			Assert.IsNull(entry);
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithWrongAplha2CodeShouldReturnNull()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("XX");
-            Assert.IsNull(entry);
-        }
+		[TestMethod]
+		public void GetCountryCodeWithWrongAplha2CodeShouldReturnNull()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("XX");
+			Assert.IsNull(entry);
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithWrongAlpha3CodeShouldReturnNull()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("XXX");
-            Assert.IsNull(entry);
-        }
+		[TestMethod]
+		public void GetCountryCodeWithWrongAlpha3CodeShouldReturnNull()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("XXX");
+			Assert.IsNull(entry);
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithCZCodeShouldReturnCzechRepublic()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
-            Assert.IsTrue(entry.CountryName.Contains("Czech Republic"));
-        }
+		[TestMethod]
+		public void GetCountryCodeWithCZCodeShouldReturnCzechRepublic()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
+			Assert.IsTrue(entry.CountryName.Contains("Czech Republic"));
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithCZECodeShouldReturnCzechRepublic()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("CZE");
-            Assert.IsTrue(entry.CountryName.Contains("Czech Republic"));
-        }
+		[TestMethod]
+		public void GetCountryCodeWithCZECodeShouldReturnCzechRepublic()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("CZE");
+			Assert.IsTrue(entry.CountryName.Contains("Czech Republic"));
+		}
 
-        [TestMethod]
-        public void GetCountryCodeWithCZAplha2ShouldReturnCZEAsAplha3()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
-            Assert.AreEqual("CZE", entry.Alpha3);
-        }
+		[TestMethod]
+		public void GetCountryCodeWithCZAplha2ShouldReturnCZEAsAplha3()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
+			Assert.AreEqual("CZE", entry.Alpha3);
+		}
 
-        [TestMethod]
-        public void GetCountryEqualsOnTwoDifferentObjectsShouldReturnFalse()
-        {
-            CountryCodeEntry entry1 = CountryCode.GetCountryCode("CZ");
-            CountryCodeEntry entry2 = CountryCode.GetCountryCode("DE");
+		[TestMethod]
+		public void GetCountryEqualsOnTwoDifferentObjectsShouldReturnFalse()
+		{
+			CountryCodeEntry entry1 = CountryCode.GetCountryCode("CZ");
+			CountryCodeEntry entry2 = CountryCode.GetCountryCode("DE");
 
-            Assert.IsFalse(entry1.Equals(entry2));
-        }
+			Assert.IsFalse(entry1.Equals(entry2));
+		}
 
-        [TestMethod]
-        public void GetCountryEqualsOnDifferentObjectShouldReturnFalse()
-        {
-            CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
-            Assert.IsFalse(entry.Equals("Test"));
-        }
+		[TestMethod]
+		public void GetCountryEqualsOnDifferentObjectShouldReturnFalse()
+		{
+			CountryCodeEntry entry = CountryCode.GetCountryCode("CZ");
+			Assert.IsFalse(entry.Equals("Test"));
+		}
 
-        [TestMethod]
-        public void GetCountryTwoDifferentObjectsShouldHaveDifferentHashcode()
-        {
-            CountryCodeEntry entry1 = CountryCode.GetCountryCode("CZ");
-            CountryCodeEntry entry2 = CountryCode.GetCountryCode("DE");
+		[TestMethod]
+		public void GetCountryTwoDifferentObjectsShouldHaveDifferentHashcode()
+		{
+			CountryCodeEntry entry1 = CountryCode.GetCountryCode("CZ");
+			CountryCodeEntry entry2 = CountryCode.GetCountryCode("DE");
 
-            Assert.AreNotEqual(entry1.GetHashCode(), entry2.GetHashCode());
-        }
+			Assert.AreNotEqual(entry1.GetHashCode(), entry2.GetHashCode());
+		}
 
-        [TestMethod]
-        public void GetCountryCodesShouldReturnAllOfThem()
-        {
-            IEnumerable<CountryCodeEntry> entries = CountryCode.GetCountryCodes();
-            Assert.AreEqual(251, entries.Count());
-        }
-    }
+		[TestMethod]
+		public void GetCountryCodesShouldReturnAllOfThem()
+		{
+			IEnumerable<CountryCodeEntry> entries = CountryCode.GetCountryCodes();
+			Assert.AreEqual(251, entries.Count());
+		}
+
+		[TestMethod]
+		public void GetEurozoneSEPAMembersShouldReturn28()
+		{
+			IEnumerable<CountryCodeEntry> members = CountryCode.GetEurozoneSEPACountryCodes();
+			Assert.AreEqual(28, members.Count());
+		}
+
+		[TestMethod]
+		public void GetAllSEPAMemebersShouldReturn44()
+		{
+			IEnumerable<CountryCodeEntry> members = CountryCode.GetAllSEPACountryCodes();
+			Assert.AreEqual(44, members.Count());
+		}
+
+		[TestMethod]
+		public void LookupForValidSEPACountryByCodeShouldReturnObjectWithValidFlags()
+		{
+			IEnumerable<CountryCodeEntry> members = CountryCode.GetAllSEPACountryCodes();
+			var member = members.Single(x => x.Alpha2 == "DE"); // Germany is SEPA and Eurozone member
+			Assert.IsTrue(member.IsSEPAMember & member.IsUsingEuros);
+		}
+	}
 }
