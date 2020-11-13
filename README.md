@@ -1,4 +1,8 @@
 # IBAN4Net
+
+<p><img src="https://img.shields.io/badge/netstandard-1.2-blue" /> <img src="https://img.shields.io/badge/netstandard-1.4-blue" /> <img src="https://img.shields.io/badge/netstandard-2.0-blue" /> <img src="https://img.shields.io/badge/.net-4.5-blue" /> <img src="https://img.shields.io/badge/.net-5.0-blue" /></p>
+<p><a href="https://www.nuget.org/packages/IBAN4Net"> <img src="https://buildstats.info/nuget/IBAN4Net" /></a></p>
+
 A port of Artur Mkrtchyan's IBAN4j project to .NET (netstandard). Artur's project can be found <a href="https://github.com/arturmkrtchyan/iban4j" target="_blank">here</a>
 
 IBAN4Net is a library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).
