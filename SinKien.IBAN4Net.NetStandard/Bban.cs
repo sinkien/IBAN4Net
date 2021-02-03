@@ -221,7 +221,7 @@ namespace SinKien.IBAN4Net
                                                             BBanEntry.BranchCode(3, "n"),
                                                             BBanEntry.AccountNumber(115, "c")));
 
-            _bbanStructures.Add("MC", new BBanStructure(BBanEntry.BankCode(, "n"),
+            _bbanStructures.Add("MC", new BBanStructure(BBanEntry.BankCode(5, "n"),
                                                            BBanEntry.BranchCode(5, "n"),
                                                            BBanEntry.AccountNumber(11, "c"),
                                                            BBanEntry.NationalCheckDigit(2, "n")));
