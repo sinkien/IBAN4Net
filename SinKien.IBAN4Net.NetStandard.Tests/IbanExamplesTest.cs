@@ -74,6 +74,20 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void CoteDivoire_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("CI77A12312341234123412341234", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void CoteDivoire_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("CI97A12312341234123412341234", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Morocco_ValidIbanShouldPass()
         {
             IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);

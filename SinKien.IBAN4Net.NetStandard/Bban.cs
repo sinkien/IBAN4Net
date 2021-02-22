@@ -425,6 +425,14 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(13, "n")
             ));
+
+            //Cote Divoire
+            _bbanStructures.Add("CI", new BBanStructure(
+                BBanEntry.NationalCheckDigit(1, "a"),
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
         }
 
         /// <summary>
