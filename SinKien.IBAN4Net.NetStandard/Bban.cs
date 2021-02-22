@@ -418,6 +418,13 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(13, "n")
             ));
+
+            //Congo
+            _bbanStructures.Add("CG", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
         }
 
         /// <summary>

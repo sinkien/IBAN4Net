@@ -60,6 +60,20 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void Congo_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("CG3930011000101013451300019", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Congo_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("CG0930011000101013451300019", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Morocco_ValidIbanShouldPass()
         {
             IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);
