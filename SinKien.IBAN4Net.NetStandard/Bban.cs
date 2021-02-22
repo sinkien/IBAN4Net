@@ -397,6 +397,108 @@ namespace SinKien.IBAN4Net
             //Senegal
             _bbanStructures.Add("SN", new BBanStructure(BBanEntry.BankCode(1, "a"),
                 BBanEntry.AccountNumber(23, "n")));
+
+            //Central African Republic
+            _bbanStructures.Add("CF", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Chad
+            _bbanStructures.Add("TD", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Comoros
+            _bbanStructures.Add("KM", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Congo
+            _bbanStructures.Add("CG", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Cote Divoire
+            _bbanStructures.Add("CI", new BBanStructure(
+                BBanEntry.NationalCheckDigit(1, "a"),
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Djibouti
+            _bbanStructures.Add("DJ", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Equatorial Guinea
+            _bbanStructures.Add("GQ", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Gabon
+            _bbanStructures.Add("GA", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Guinea-Bissau
+            _bbanStructures.Add("GW", new BBanStructure(
+                BBanEntry.BankCode(4, "c"), //2chars and 2numbers actually
+                BBanEntry.BranchCode(4, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Honduras
+            _bbanStructures.Add("HN", new BBanStructure(
+                BBanEntry.BankCode(4, "c"),
+                BBanEntry.AccountNumber(20, "n")
+            ));
+            
+            //Morocco
+            _bbanStructures.Add("MA", new BBanStructure(
+                BBanEntry.BankCode(3, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(16, "n")
+            ));
+
+            //Nicaragua
+            _bbanStructures.Add("NI", new BBanStructure(
+                BBanEntry.BankCode(4, "c"),
+                BBanEntry.AccountNumber(24, "n")
+            ));
+
+            //Niger
+            _bbanStructures.Add("NE", new BBanStructure(
+                BBanEntry.BankCode(2, "c"),
+                BBanEntry.AccountNumber(22, "n")
+            ));
+
+            //Togo
+            _bbanStructures.Add("TG", new BBanStructure(
+                BBanEntry.BankCode(2, "c"),
+                BBanEntry.AccountNumber(22, "n")
+            ));
+
+            //Libya
+            _bbanStructures.Add("LY", new BBanStructure(
+                BBanEntry.BankCode(3, "n"),
+                BBanEntry.BranchCode(3, "n"),
+                BBanEntry.AccountNumber(15, "n")
+            ));
         }
 
         /// <summary>
