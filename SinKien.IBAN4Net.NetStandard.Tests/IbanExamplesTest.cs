@@ -186,6 +186,20 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void Niger_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("NE58NE0380100100130305000268", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Niger_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("NE28NE0380100100130305000268", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Belarus_ValidIbanShouldPass()
         {
             //Iban iban = Iban.CreateInstance("BY86AKBB10100000002966000000");

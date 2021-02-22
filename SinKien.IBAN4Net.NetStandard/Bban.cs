@@ -474,6 +474,12 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BankCode(4, "c"),
                 BBanEntry.AccountNumber(24, "n")
             ));
+
+            //Niger
+            _bbanStructures.Add("NE", new BBanStructure(
+                BBanEntry.BankCode(2, "c"),
+                BBanEntry.AccountNumber(22, "n")
+            ));
         }
 
         /// <summary>
