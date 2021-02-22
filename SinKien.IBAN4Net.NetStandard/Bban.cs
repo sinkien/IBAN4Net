@@ -480,6 +480,19 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BankCode(2, "c"),
                 BBanEntry.AccountNumber(22, "n")
             ));
+
+            //Togo
+            _bbanStructures.Add("TG", new BBanStructure(
+                BBanEntry.BankCode(2, "c"),
+                BBanEntry.AccountNumber(22, "n")
+            ));
+
+            //Libya
+            _bbanStructures.Add("LY", new BBanStructure(
+                BBanEntry.BankCode(3, "n"),
+                BBanEntry.BranchCode(3, "n"),
+                BBanEntry.AccountNumber(15, "n")
+            ));
         }
 
         /// <summary>

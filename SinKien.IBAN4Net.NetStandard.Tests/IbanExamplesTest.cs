@@ -5,7 +5,6 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
     [TestClass]
     public class IbanExamplesTest
     {
-
         [TestMethod]
         public void AllSampleValidIBANsShouldWork()
         {
@@ -196,6 +195,34 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         public void Niger_InvalidCheckDigitShouldFailValidation()
         {
             IbanUtils.IsValid("NE28NE0380100100130305000268", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
+        public void Togo_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("TG53TG0090604310346500400070", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Togo_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("TG33TG0090604310346500400070", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
+        public void Libya_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("LY83002048000020100120361", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Libya_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("LY33002048000020100120361", out IbanFormatViolation result);
             Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
         }
 
