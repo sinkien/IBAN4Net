@@ -463,9 +463,10 @@ namespace SinKien.IBAN4Net
             ));
 
             //Honduras
-            _bbanStructures.Add("HN", new BBanStructure(
-                BBanEntry.BankCode(4, "c"),
-                BBanEntry.AccountNumber(20, "n")
+            _bbanStructures.Add("MA", new BBanStructure(
+                BBanEntry.BankCode(3, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(16, "n")
             ));
         }
 
