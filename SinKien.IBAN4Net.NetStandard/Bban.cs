@@ -468,6 +468,12 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(16, "n")
             ));
+
+            //Nicaragua
+            _bbanStructures.Add("NI", new BBanStructure(
+                BBanEntry.BankCode(4, "c"),
+                BBanEntry.AccountNumber(24, "n")
+            ));
         }
 
         /// <summary>
