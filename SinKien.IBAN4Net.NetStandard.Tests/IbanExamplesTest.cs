@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
 {
@@ -14,8 +13,22 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
             foreach (var iban in IBANs)
             {
                 IbanUtils.IsValid(iban, out IbanFormatViolation result);
-                Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION, $"{iban}: {result.ToString()}");
+                Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION, $"{iban}: {result}");
             }
+        }
+
+        [TestMethod]
+        public void Morocco_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Morocco_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("MA04181815211118602202000107", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
         }
 
         [TestMethod]
