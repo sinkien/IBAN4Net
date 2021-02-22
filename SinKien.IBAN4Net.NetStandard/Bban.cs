@@ -433,6 +433,27 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(13, "n")
             ));
+
+            //Djibouti
+            _bbanStructures.Add("DJ", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Equatorial Guinea
+            _bbanStructures.Add("GQ", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Gabon
+            _bbanStructures.Add("GA", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
         }
 
         /// <summary>

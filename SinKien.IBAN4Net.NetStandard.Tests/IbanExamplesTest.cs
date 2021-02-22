@@ -88,6 +88,48 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void Djibouti_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("DJ2110002010010409943020008", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Djibouti_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("DJ0110002010010409943020008", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
+        public void EquatorialGuinea_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("GQ7050002001003715228190196", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void EquatorialGuinea_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("GQ7350002001003715228190196", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
+        public void Gabon_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("GA2140021010032001890020126", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Gabon_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("GA1140021010032001890020126", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Morocco_ValidIbanShouldPass()
         {
             IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);
