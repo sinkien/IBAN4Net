@@ -18,6 +18,20 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void CentralAfricanRepublic_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("CF4220001000010120069700160", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void CentralAfricanRepublic_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("CF0220001000010120069700160", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Morocco_ValidIbanShouldPass()
         {
             IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);
@@ -28,7 +42,7 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         public void Morocco_InvalidCheckDigitShouldFailValidation()
         {
             IbanUtils.IsValid("MA04181815211118602202000107", out IbanFormatViolation result);
-            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
         }
 
         [TestMethod]

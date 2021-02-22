@@ -397,6 +397,13 @@ namespace SinKien.IBAN4Net
             //Senegal
             _bbanStructures.Add("SN", new BBanStructure(BBanEntry.BankCode(1, "a"),
                 BBanEntry.AccountNumber(23, "n")));
+
+            //Central African Republic
+            _bbanStructures.Add("CF", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
         }
 
         /// <summary>
