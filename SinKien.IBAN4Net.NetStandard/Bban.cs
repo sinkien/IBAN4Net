@@ -411,6 +411,13 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(13, "n")
             ));
+
+            //Comoros
+            _bbanStructures.Add("KM", new BBanStructure(
+                BBanEntry.BankCode(5, "n"),
+                BBanEntry.BranchCode(5, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
         }
 
         /// <summary>
