@@ -454,6 +454,19 @@ namespace SinKien.IBAN4Net
                 BBanEntry.BranchCode(5, "n"),
                 BBanEntry.AccountNumber(13, "n")
             ));
+
+            //Guinea-Bissau
+            _bbanStructures.Add("GW", new BBanStructure(
+                BBanEntry.BankCode(4, "c"), //2chars and 2numbers actually
+                BBanEntry.BranchCode(4, "n"),
+                BBanEntry.AccountNumber(13, "n")
+            ));
+
+            //Honduras
+            _bbanStructures.Add("HN", new BBanStructure(
+                BBanEntry.BankCode(4, "c"),
+                BBanEntry.AccountNumber(20, "n")
+            ));
         }
 
         /// <summary>

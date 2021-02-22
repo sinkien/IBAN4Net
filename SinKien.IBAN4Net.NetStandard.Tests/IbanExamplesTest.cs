@@ -130,6 +130,34 @@ namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
         }
 
         [TestMethod]
+        public void GuineaBissau_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("GW04GW1430010181800637601", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void GuineaBissau_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("GW01GW1430010181800637601", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
+        public void Honduras_ValidIbanShouldPass()
+        {
+            IbanUtils.IsValid("HN54PISA00000000000000123124", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.NO_VIOLATION);
+        }
+
+        [TestMethod]
+        public void Honduras_InvalidCheckDigitShouldFailValidation()
+        {
+            IbanUtils.IsValid("HN34PISA00000000000000123124", out IbanFormatViolation result);
+            Assert.IsTrue(result == IbanFormatViolation.IBAN_INVALID_CHECK_DIGIT_VALUE);
+        }
+
+        [TestMethod]
         public void Morocco_ValidIbanShouldPass()
         {
             IbanUtils.IsValid("MA64181815211118602202000107", out IbanFormatViolation result);
