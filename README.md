@@ -1,18 +1,22 @@
 # IBAN4Net
 
-<p><img src="https://img.shields.io/badge/netstandard-1.2-blue" /> <img src="https://img.shields.io/badge/netstandard-1.4-blue" /> <img src="https://img.shields.io/badge/netstandard-2.0-blue" /> <img src="https://img.shields.io/badge/.net-4.5-blue" /> <img src="https://img.shields.io/badge/.net-5.0-blue" /></p>
+<p><img src="https://img.shields.io/badge/netstandard-1.2-blue" /> <img src="https://img.shields.io/badge/netstandard-1.4-blue" /> <img src="https://img.shields.io/badge/netstandard-2.0-blue" /> <img src="https://img.shields.io/badge/.net-4.5-blue" /> <img src="https://img.shields.io/badge/.net-5.0-blue" /> <img src="https://img.shields.io/badge/.net-6.0-blue" /></p>
 <p><a href="https://www.nuget.org/packages/IBAN4Net"> <img src="https://buildstats.info/nuget/IBAN4Net" /></a></p>
 
-A port of Artur Mkrtchyan's IBAN4j project to .NET (netstandard). Artur's project can be found <a href="https://github.com/arturmkrtchyan/iban4j" target="_blank">here</a>
+IBAN4Net is a library for validation and generation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).
 
-IBAN4Net is a library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).
+This project is a port of Artur Mkrtchyan's IBAN4j project to .NET (netstandard). Artur's project can be found <a href="https://github.com/arturmkrtchyan/iban4j" target="_blank">here.</a>
+
 
 More information about IBANs and BICs can be found here:
 
 * <a href="http://en.wikipedia.org/wiki/ISO_13616" target="_blank">IBAN ISO_13616</a>
 * <a href="http://en.wikipedia.org/wiki/ISO_9362" target="_blank">BIC ISO_9362</a>
 
-This library is written in C# ver. 6.0 and it is not a one-to-one port of the original IBAN4j project. It contains some tweaks here and there and it doesn't support random IBAN generation, yet.
+This library is written with C# ver. 6.0 and it is not a one-to-one port of the original IBAN4j project. It contains some tweaks here and there and it doesn't support random IBAN generation, yet.
+
+Since 10/2022 the library contains definitions for all countries with IBAN support listed as Partial/Experimental. Definitions for those countries are...vague at best. Take that as a warning. PRs better clarifying those rules are much welcomed.
+
 
 Some of the differencies from the java project are:
 
@@ -128,6 +132,15 @@ else
 
 ```
 
+### Contribute and PRs
+
+I don't like PRs supporting the everlasting "tabs vs. spaces" battle. Main project contains .editorconfig (VS2022) file which sets the score clearly ;)
+
+
+
+I'm really sorry for a rather long delays when accepting PRs. 
+
+
 ### References
 - <a href="https://github.com/arturmkrtchyan/iban4j">IBAN4j project by Artur Mkrtchyan</a>
 - <a href="http://en.wikipedia.org/wiki/ISO_13616">http://en.wikipedia.org/wiki/ISO_13616</a>
@@ -137,6 +150,6 @@ else
 
 
 ### License
-Copyright 2020 Vaclav Beca [sinkien].
+Copyright 2022 Vaclav Beca [sinkien].
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
