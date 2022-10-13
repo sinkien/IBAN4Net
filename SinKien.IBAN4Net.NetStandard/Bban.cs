@@ -1,4 +1,4 @@
-/*
+﻿/*
  * IBAN4Net
  * Copyright 2020 Vaclav Beca [sinkien]
  *
@@ -189,12 +189,10 @@ namespace SinKien.IBAN4Net
 
 			if (countryCode != null)
 			{
-
 				if (_bbanStructures.ContainsKey(countryCode.Alpha2))
 				{
 					result = _bbanStructures[countryCode.Alpha2].Clone();
 				}
-
 			}
 
 			return result;
@@ -215,7 +213,6 @@ namespace SinKien.IBAN4Net
 				{
 					result = _bbanStructures[alpha2Code].Clone();
 				}
-
 			}
 
 			return result;
@@ -277,7 +274,6 @@ namespace SinKien.IBAN4Net
 			foreach (var item in Entries)
 			{
 				result.Entries.Add(new BBanEntry(item.EntryType, item.CharacterType, item.Length));
-
 			}
 			return result;
 		}
