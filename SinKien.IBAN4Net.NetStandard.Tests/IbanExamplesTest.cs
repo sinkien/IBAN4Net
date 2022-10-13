@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SinKien.IBAN4Net.NetStandard.Tests.Net45
 {
     [TestClass]
     public class IbanExamplesTest
     {
-
         [TestMethod]
         public void AllSampleValidIBANsShouldWork()
         {
