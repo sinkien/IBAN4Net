@@ -1,4 +1,4 @@
-﻿/*
+/*
  * IBAN4Net
  * Copyright 2020 Vaclav Beca [sinkien]
  *
