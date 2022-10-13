@@ -22,78 +22,78 @@
 
 namespace SinKien.IBAN4Net
 {
-    /// <summary>
-    /// Basic Bank Account Number Entry types
-    /// </summary>
-    public enum BBanEntryType
-    {
-        BANK_CODE,
-        BRANCH_CODE,
-        ACCOUNT_NUMBER_PREFIX,
-        ACCOUNT_NUMBER,
-        NATIONAL_CHECK_DIGIT,
-        ACCOUNT_TYPE,
-        OWNER_ACCOUNT_NUMBER,
-        IDENTIFICATION_NUMBER,
-        BALANCE_ACCOUNT_NUMBER
-    }
+	/// <summary>
+	/// Basic Bank Account Number Entry types
+	/// </summary>
+	public enum BBanEntryType
+	{
+		BANK_CODE,
+		BRANCH_CODE,
+		ACCOUNT_NUMBER_PREFIX,
+		ACCOUNT_NUMBER,
+		NATIONAL_CHECK_DIGIT,
+		ACCOUNT_TYPE,
+		OWNER_ACCOUNT_NUMBER,
+		IDENTIFICATION_NUMBER,
+		BALANCE_ACCOUNT_NUMBER
+	}
 
-    /// <summary>
-    /// Character type for BBAN rule entry
-    /// </summary>
-    public enum BBanEntryCharacterType
-    {
-        N = 'n',    // Digits (numbers 0-9)
-        A = 'a',    // Upper case letters (A-Z)
-        C = 'c'     // Alphanumeric (a-z, A-Z, 0-9)        
-    }
+	/// <summary>
+	/// Character type for BBAN rule entry
+	/// </summary>
+	public enum BBanEntryCharacterType
+	{
+		N = 'n',    // Digits (numbers 0-9)
+		A = 'a',    // Upper case letters (A-Z)
+		C = 'c'     // Alphanumeric (a-z, A-Z, 0-9)        
+	}
 
-    /// <summary>
-    /// Types of BIC's format violation
-    /// </summary>
-    public enum BicFormatViolation
-    {
-        NO_VIOLATION,
-        UNKNOWN,
-        BIC_NOT_EMPTY_OR_NULL,
-        BIC_LENGTH_8_OR_11,
-        BIC_ONLY_UPPER_CASE_LETTERS,
-        BRANCH_CODE_ONLY_LETTERS_OR_DIGITS,
-        LOCATION_CODE_ONLY_LETTERS_OR_DIGITS,
-        BANK_CODE_ONLY_LETTERS,
-        COUNTRY_CODE_ONLY_UPPER_CASE_LETTERS,
-        COUNTRY_CODE_UNSUPPORTED
-    }
+	/// <summary>
+	/// Types of BIC's format violation
+	/// </summary>
+	public enum BicFormatViolation
+	{
+		NO_VIOLATION,
+		UNKNOWN,
+		BIC_NOT_EMPTY_OR_NULL,
+		BIC_LENGTH_8_OR_11,
+		BIC_ONLY_UPPER_CASE_LETTERS,
+		BRANCH_CODE_ONLY_LETTERS_OR_DIGITS,
+		LOCATION_CODE_ONLY_LETTERS_OR_DIGITS,
+		BANK_CODE_ONLY_LETTERS,
+		COUNTRY_CODE_ONLY_UPPER_CASE_LETTERS,
+		COUNTRY_CODE_UNSUPPORTED
+	}
 
-    /// <summary>
-    /// Types of IBAN's format violation 
-    /// </summary>
-    public enum IbanFormatViolation
-    {
-        NO_VIOLATION,
-        UNKNOWN,
-        IBAN_NOT_EMPTY_OR_NULL,
-        IBAN_VALID_CHARACTERS,
-        IBAN_INVALID_CHECK_DIGIT_VALUE,
-        CHECK_DIGIT_ONLY_DIGITS,
-        CHECK_DIGIT_TWO_DIGITS,
-        COUNTRY_CODE_TWO_LETTERS,
-        COUNTRY_CODE_UPPER_CASE_LETTERS,
-        COUNTRY_CODE_EXISTS,
-        COUNTRY_CODE_NOT_NULL,
-        COUNTRY_CODE_UNSUPPORTED,
-        BBAN_LENGTH,
-        BBAN_ONLY_DIGITS,
-        BBAN_ONLY_UPPER_CASE_LETTERS,
-        BBAN_ONLY_DIGITS_OR_LETTERS,
-        BBAN_ENTRY_TOO_LONG,
-        BANK_CODE_NOT_NULL,
-        BANK_CODE_TOO_LONG,
-        BANK_CODE_TOO_SHORT,
-        ACCOUNT_NUMBER_NOT_NULL,
-        ACCOUNT_NUMBER_TOO_LONG,
-        ACCOUNT_NUMBER_TOO_SHORT,
-        ACCOUNT_NUMBER_PREFIX_TOO_LONG,
-        ACCOUNT_NUMBER_PREFIX_TOO_SHORT
-    }
+	/// <summary>
+	/// Types of IBAN's format violation 
+	/// </summary>
+	public enum IbanFormatViolation
+	{
+		NO_VIOLATION,
+		UNKNOWN,
+		IBAN_NOT_EMPTY_OR_NULL,
+		IBAN_VALID_CHARACTERS,
+		IBAN_INVALID_CHECK_DIGIT_VALUE,
+		CHECK_DIGIT_ONLY_DIGITS,
+		CHECK_DIGIT_TWO_DIGITS,
+		COUNTRY_CODE_TWO_LETTERS,
+		COUNTRY_CODE_UPPER_CASE_LETTERS,
+		COUNTRY_CODE_EXISTS,
+		COUNTRY_CODE_NOT_NULL,
+		COUNTRY_CODE_UNSUPPORTED,
+		BBAN_LENGTH,
+		BBAN_ONLY_DIGITS,
+		BBAN_ONLY_UPPER_CASE_LETTERS,
+		BBAN_ONLY_DIGITS_OR_LETTERS,
+		BBAN_ENTRY_TOO_LONG,
+		BANK_CODE_NOT_NULL,
+		BANK_CODE_TOO_LONG,
+		BANK_CODE_TOO_SHORT,
+		ACCOUNT_NUMBER_NOT_NULL,
+		ACCOUNT_NUMBER_TOO_LONG,
+		ACCOUNT_NUMBER_TOO_SHORT,
+		ACCOUNT_NUMBER_PREFIX_TOO_LONG,
+		ACCOUNT_NUMBER_PREFIX_TOO_SHORT
+	}
 }

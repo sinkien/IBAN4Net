@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.2;netstandard1.4;netstandard2.0;net5.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard1.2;netstandard1.4;netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <RootNamespace>SinKien.IBAN4Net</RootNamespace>
     <AssemblyName>SinKien.IBAN4Net</AssemblyName>
-    <Version>2.0.5</Version>
+    <Version>2.0.6</Version>
     <Authors>Vaclav Beca</Authors>
-    <Description>IBAN4Net is a .NET Standard (1.2, 1.4, 2.0) and net 5.0 library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).</Description>
+    <Description>IBAN4Net is a .NET Standard (1.2, 1.4, 2.0) and net 5+ library for generation and validation of the International Bank Account Numbers (IBAN) and Business Identifier Codes (BIC).</Description>
     <PackageProjectUrl>https://github.com/sinkien/IBAN4Net</PackageProjectUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <Copyright>Copyright 2020 Vaclav Beca [sinkien]</Copyright>
+    <Copyright>Copyright 2022 Vaclav Beca [sinkien]</Copyright>
     <PackageTags>iban, bic, iban4net, sepa</PackageTags>
     <RepositoryType>github</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/sinkien/IBAN4Net</RepositoryUrl>
-    <PackageReleaseNotes>net5.0 support</PackageReleaseNotes>
-    <AssemblyVersion>2.0.5.0</AssemblyVersion>
-    <FileVersion>2.0.5.0</FileVersion>
+    <PackageReleaseNotes>All experimental countries, minor tweaks, net6.0 support</PackageReleaseNotes>
+    <AssemblyVersion>2.0.6.0</AssemblyVersion>
+    <FileVersion>2.0.6.0</FileVersion>
     <PackageLicenseFile></PackageLicenseFile>
     <PackageId>IBAN4Net</PackageId>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -27,5 +27,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Sources\IBAN4Net\SinKien.IBAN4Net.NetStandard\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Sources\IBAN4Net\SinKien.IBAN4Net.NetStandard\.editorconfig" />
   </ItemGroup>
 </Project>

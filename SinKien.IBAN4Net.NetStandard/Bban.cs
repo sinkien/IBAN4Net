@@ -43,378 +43,139 @@ namespace SinKien.IBAN4Net
 		/// </summary>
 		private static void loadStructures()
 		{
-			_bbanStructures = new SortedDictionary<string, BBanStructure>();
-
-
-			_bbanStructures.Add("AD", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(12, "c")));
-
-			_bbanStructures.Add("AE", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("AL", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.NationalCheckDigit(1, "n"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("AT", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.AccountNumber(11, "n")));
-
-			_bbanStructures.Add("AZ", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(20, "c")));
-
-			_bbanStructures.Add("BA", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(8, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("BE", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(7, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("BG", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountType(2, "n"),
-															BBanEntry.AccountNumber(8, "c")));
-
-			_bbanStructures.Add("BH", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(14, "c")));
-
-			_bbanStructures.Add("BR", new BBanStructure(BBanEntry.BankCode(8, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(10, "n"),
-															BBanEntry.AccountType(1, "a"),
-															BBanEntry.OwnerAccountNumber(1, "c")));
-
-			_bbanStructures.Add("CF", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(11, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("CH", new BBanStructure(BBanEntry.BankCode(5, "n"),
-														   BBanEntry.AccountNumber(12, "c")));
-
-			_bbanStructures.Add("CI", new BBanStructure(BBanEntry.BankCode(1, "a"),
-														   BBanEntry.AccountNumber(23, "n")));
-
-			_bbanStructures.Add("CM", new BBanStructure(BBanEntry.AccountNumber(23, "n")));
-
-			_bbanStructures.Add("CR", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumber(14, "n")));
-
-			_bbanStructures.Add("CY", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("CZ", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumberPrefix(6, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("DE", new BBanStructure(BBanEntry.BankCode(8, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("DK", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("DO", new BBanStructure(BBanEntry.BankCode(4, "c"),
-															BBanEntry.AccountNumber(20, "n")));
-
-			_bbanStructures.Add("EE", new BBanStructure(BBanEntry.BankCode(2, "n"),
-															BBanEntry.BranchCode(2, "n"),
-															BBanEntry.AccountNumber(11, "n"),
-															BBanEntry.NationalCheckDigit(1, "n")));
-
-			_bbanStructures.Add("ES", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.NationalCheckDigit(2, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-			//Bank code is 3 and account number 10 + 1 check digit (11)
-			_bbanStructures.Add("FI", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(7, "n"),
-															BBanEntry.NationalCheckDigit(1, "n")));
-
-			_bbanStructures.Add("FO", new BBanStructure(BBanEntry.BankCode(4, "n"),
-														   BBanEntry.AccountNumber(9, "n"),
-														   BBanEntry.NationalCheckDigit(1, "n")));
-
-			_bbanStructures.Add("FR", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(11, "c"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("GA", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(11, "c"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("GB", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.BranchCode(6, "n"),
-															BBanEntry.AccountNumber(8, "n")));
-
-			_bbanStructures.Add("GE", new BBanStructure(BBanEntry.BankCode(2, "a"),
-															BBanEntry.AccountNumber(16, "n")));
-
-			_bbanStructures.Add("GI", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(15, "c")));
-
-			_bbanStructures.Add("GL", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("GR", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("GT", new BBanStructure(BBanEntry.BankCode(4, "c"),
-															BBanEntry.AccountNumber(20, "c")));
-
-			_bbanStructures.Add("HR", new BBanStructure(BBanEntry.BankCode(7, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("HU", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(16, "n"),
-															BBanEntry.NationalCheckDigit(1, "n")));
-
-			_bbanStructures.Add("IE", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.BranchCode(6, "n"),
-															BBanEntry.AccountNumber(8, "n")));
-
-			_bbanStructures.Add("IL", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(13, "n")));
-
-			//account number should be 18 and no brach code
-			_bbanStructures.Add("IS", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(2, "n"),
-															BBanEntry.AccountNumber(6, "n"),
-															BBanEntry.IdentificationNumber(10, "n")));
-
-			_bbanStructures.Add("IT", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"),
-															BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(12, "c")));
-
-			_bbanStructures.Add("KW", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(22, "c")));
-
-			_bbanStructures.Add("KZ", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(13, "c")));
-
-			_bbanStructures.Add("LB", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumber(20, "c")));
-
-			_bbanStructures.Add("LI", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.AccountNumber(12, "c")));
-
-			_bbanStructures.Add("LT", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.AccountNumber(11, "n")));
-
-			_bbanStructures.Add("LU", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(13, "c")));
-
-			_bbanStructures.Add("LV", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(13, "c")));
-
-			_bbanStructures.Add("LY", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(115, "c")));
-
-			_bbanStructures.Add("MC", new BBanStructure(BBanEntry.BankCode(5, "n"),
-														   BBanEntry.BranchCode(5, "n"),
-														   BBanEntry.AccountNumber(11, "c"),
-														   BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("MD", new BBanStructure(BBanEntry.BankCode(2, "c"),
-														BBanEntry.AccountNumber(18, "c")));
-
-			_bbanStructures.Add("ME", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(13, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-
-			_bbanStructures.Add("MK", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(10, "c"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("MR", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(11, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("MT", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(18, "c")));
-
-
-			_bbanStructures.Add("MU", new BBanStructure(BBanEntry.BankCode(6, "c"),
-															BBanEntry.BranchCode(2, "n"),
-															BBanEntry.AccountNumber(18, "c")));
-
-			_bbanStructures.Add("NL", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("NO", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumber(6, "n"),
-															BBanEntry.NationalCheckDigit(1, "n")));
-
-			_bbanStructures.Add("PK", new BBanStructure(BBanEntry.BankCode(4, "c"),
-															BBanEntry.AccountNumber(16, "n")));
-
-			_bbanStructures.Add("PL", new BBanStructure(BBanEntry.BranchCode(8, "n"),
-															BBanEntry.AccountNumber(16, "n")));
-
-			_bbanStructures.Add("PS", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(21, "c")));
-
-			_bbanStructures.Add("PT", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(11, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("RO", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("RS", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.AccountNumber(13, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("SA", new BBanStructure(BBanEntry.BankCode(2, "n"),
-															BBanEntry.AccountNumber(18, "c")));
-
-			_bbanStructures.Add("SE", new BBanStructure(BBanEntry.BankCode(3, "n"),
-														   BBanEntry.AccountNumber(17, "n")));
-
-			_bbanStructures.Add("SI", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(0, "n"),
-															BBanEntry.AccountNumber(8, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("SK", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.AccountNumberPrefix(6, "n"),
-															BBanEntry.AccountNumber(10, "n")));
-
-			_bbanStructures.Add("SM", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"),
-														  BBanEntry.BankCode(5, "n"),
-														  BBanEntry.BranchCode(5, "n"),
-														  BBanEntry.AccountNumber(12, "c")));
-
-			_bbanStructures.Add("TN", new BBanStructure(BBanEntry.BankCode(2, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(15, "c")));
-
-			_bbanStructures.Add("TR", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.NationalCheckDigit(1, "c"),
-															BBanEntry.AccountNumber(16, "c")));
-
-
-			_bbanStructures.Add("VG", new BBanStructure(BBanEntry.BankCode(4, "c"),
-															BBanEntry.AccountNumber(16, "n")));
-
-			//no branch code is defined
-			_bbanStructures.Add("JO", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(18, "c")));
-
-			_bbanStructures.Add("QA", new BBanStructure(BBanEntry.BankCode(4, "a"),
-															BBanEntry.AccountNumber(21, "c")));
-			//defined as account number 16 but starting at pos. 5 after checksum, i.e. 
-			//swift account number definition includes the bank code (2) and branch code(2)
-			_bbanStructures.Add("XK", new BBanStructure(BBanEntry.BankCode(2, "n"),
-															BBanEntry.BranchCode(2, "n"),
-															BBanEntry.AccountNumber(10, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("TL", new BBanStructure(BBanEntry.BankCode(3, "n"),
-														   BBanEntry.AccountNumber(14, "n"),
-														   BBanEntry.NationalCheckDigit(2, "n")));
-
-			//defined as account number 24 (was 9)
-			_bbanStructures.Add("LC", new BBanStructure(BBanEntry.BankCode(4, "a"),
-														   BBanEntry.AccountNumber(24, "c")));
-
-
-			_bbanStructures.Add("UA", new BBanStructure(BBanEntry.BankCode(6, "n"),
-															BBanEntry.AccountNumber(19, "n")));
-
-
-			_bbanStructures.Add("ST", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(11, "n"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			_bbanStructures.Add("SC", new BBanStructure(BBanEntry.BankCode(6, "c"),
-														   BBanEntry.BranchCode(2, "n"),
-														   BBanEntry.AccountNumber(19, "c")));
-
-			_bbanStructures.Add("IQ", new BBanStructure(BBanEntry.BankCode(4, "a"),
-														   BBanEntry.BranchCode(3, "n"),
-														   BBanEntry.AccountNumber(12, "n")));
-			//defined as account number 20 was (9)
-			_bbanStructures.Add("SV", new BBanStructure(BBanEntry.BankCode(4, "a"),
-														   BBanEntry.AccountNumber(20, "n")));
-
-
-			// since 2017
-			_bbanStructures.Add("BY", new BBanStructure(BBanEntry.BankCode(4, "c"),
-															BBanEntry.BalanceAccountNumber(4, "n"),
-															BBanEntry.AccountNumber(16, "c")));
-
-			_bbanStructures.Add("VA", new BBanStructure(BBanEntry.BankCode(3, "n"),
-														   BBanEntry.AccountNumber(15, "n")));
-
-			// MG is same as FR (according to Nordea's list)
-			_bbanStructures.Add("MG", new BBanStructure(BBanEntry.BankCode(5, "n"),
-															BBanEntry.BranchCode(5, "n"),
-															BBanEntry.AccountNumber(11, "c"),
-															BBanEntry.NationalCheckDigit(2, "n")));
-
-			/* NOT FOUND IN SWIFT */
-			//https://bank.codes/iban/structure/iran/
-			_bbanStructures.Add("IR", new BBanStructure(BBanEntry.AccountNumber(22, "n")));
-
-			_bbanStructures.Add("EG", new BBanStructure(BBanEntry.BankCode(4, "n"),
-															BBanEntry.BranchCode(4, "n"),
-															BBanEntry.AccountNumber(17, "n")));
-
-			_bbanStructures.Add("AX", new BBanStructure(BBanEntry.BankCode(3, "n"),
-															BBanEntry.BranchCode(3, "n"),
-															BBanEntry.AccountNumber(7, "n"),
-															BBanEntry.NationalCheckDigit(1, "n")));
-
-			//Algeria
-			_bbanStructures.Add("DZ", new BBanStructure(BBanEntry.AccountNumber(20, "n")));
-
-			//Angola
-			_bbanStructures.Add("AO", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
-
-			//Benin
-			_bbanStructures.Add("BJ", new BBanStructure(BBanEntry.BankCode(1, "a"),
-				BBanEntry.AccountNumber(23, "n")));
-
-			//Burkina Faso
-			_bbanStructures.Add("BF", new BBanStructure(BBanEntry.AccountNumber(23, "n")));
-
-			//Burundi
-			_bbanStructures.Add("BI", new BBanStructure(BBanEntry.AccountNumber(12, "n")));
-
-			//Cameroon
-			_bbanStructures.Add("CM", new BBanStructure(BBanEntry.AccountNumber(23, "n")));
-
-			//Cape Verde
-			_bbanStructures.Add("CV", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
-
-			//Mali
-			_bbanStructures.Add("ML", new BBanStructure(BBanEntry.BankCode(1, "a"),
-				BBanEntry.AccountNumber(23, "n")));
-
-			//Mozambique
-			_bbanStructures.Add("MZ", new BBanStructure(BBanEntry.AccountNumber(21, "n")));
-
-			//Senegal
-			_bbanStructures.Add("SN", new BBanStructure(BBanEntry.BankCode(1, "a"),
-				BBanEntry.AccountNumber(23, "n")));
+			_bbanStructures = new SortedDictionary<string, BBanStructure>
+			{				
+				// A
+				{ "AD", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(12, "c")) },
+				{ "AE", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(16, "c")) },
+				{ "AL", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.NationalCheckDigit(1, "n"), BBanEntry.AccountNumber(16, "c")) },
+				{ "AT", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.AccountNumber(11, "n")) },
+				{ "AX", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(7, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				{ "AZ", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(20, "c")) },
+				// B
+				{ "BA", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(8, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "BE", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(7, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "BG", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountType(2, "n"), BBanEntry.AccountNumber(8, "c")) },
+				{ "BH", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(14, "c")) },
+				{ "BI", new BBanStructure(BBanEntry.AccountNumber(12, "n")) },
+				{ "BR", new BBanStructure(BBanEntry.BankCode(8, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(10, "n"), BBanEntry.AccountType(1, "a"), BBanEntry.OwnerAccountNumber(1, "c")) },
+				{ "BY", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.BalanceAccountNumber(4, "n"), BBanEntry.AccountNumber(16, "c")) },
+				// C 
+				{ "CH", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.AccountNumber(12, "c")) },
+				{ "CR", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(14, "n")) },
+				{ "CY", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(16, "c")) },
+				{ "CZ", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumberPrefix(6, "n"), BBanEntry.AccountNumber(10, "n")) },
+				// D
+				{ "DE", new BBanStructure(BBanEntry.BankCode(8, "n"), BBanEntry.AccountNumber(10, "n")) },
+				{ "DJ", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "n")) }, // Djibouti
+				{ "DK", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(10, "n")) },
+				{ "DO", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(20, "n")) },
+				// E
+				{ "EE", new BBanStructure(BBanEntry.BankCode(2, "n"), BBanEntry.BranchCode(2, "n"), BBanEntry.AccountNumber(11, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				{ "EG", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(17, "n")) },
+				{ "ES", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.NationalCheckDigit(2, "n"), BBanEntry.AccountNumber(10, "n")) },								
+				// F
+				{ "FI", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(7, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				{ "FO", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(9, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				{ "FR", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(11, "c"), BBanEntry.NationalCheckDigit(2, "n")) },
+				// G
+				{ "GB", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(6, "n"), BBanEntry.AccountNumber(8, "n")) },
+				{ "GE", new BBanStructure(BBanEntry.BankCode(2, "a"), BBanEntry.AccountNumber(16, "n")) },
+				{ "GI", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(15, "c")) },
+				{ "GL", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(10, "n")) },
+				{ "GR", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(16, "c")) },
+				{ "GT", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(20, "c")) },
+				// H
+				{ "HR", new BBanStructure(BBanEntry.BankCode(7, "n"), BBanEntry.AccountNumber(10, "n")) },
+				{ "HU", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(16, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				// I
+				{ "IE", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(6, "n"), BBanEntry.AccountNumber(8, "n")) },
+				{ "IL", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(13, "n")) },
+				{ "IQ", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(12, "n")) },
+				{ "IS", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(2, "n"), BBanEntry.AccountNumber(6, "n"), BBanEntry.IdentificationNumber(10, "n")) },
+				{ "IT", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"), BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(12, "c")) },
+				// J
+				{ "JO", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(18, "c")) },
+				// K
+				{ "KW", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(22, "c")) },
+				{ "KZ", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(13, "c")) },
+				// L
+				{ "LB", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(20, "c")) },
+				{ "LC", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(24, "c")) },
+				{ "LI", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.AccountNumber(12, "c")) },
+				{ "LT", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.AccountNumber(11, "n")) },
+				{ "LU", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(13, "c")) },
+				{ "LV", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(13, "c")) },
+				{ "LY", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(15, "n")) }, // Libya
+				// M
+				{ "MC", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(11, "c"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "MD", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(18, "c")) },
+				{ "ME", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(13, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "MK", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(10, "c"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "MR", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(11, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "MT", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(18, "c")) },
+				{ "MU", new BBanStructure(BBanEntry.BankCode(6, "c"), BBanEntry.BranchCode(2, "n"), BBanEntry.AccountNumber(18, "c")) },
+				// N
+				{ "NL", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(10, "n")) },
+				{ "NO", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumber(6, "n"), BBanEntry.NationalCheckDigit(1, "n")) },
+				// P
+				{ "PK", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(16, "n")) },
+				{ "PL", new BBanStructure(BBanEntry.BranchCode(8, "n"), BBanEntry.AccountNumber(16, "n")) },
+				{ "PS", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(21, "c")) },
+				{ "PT", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(11, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				// Q
+				{ "QA", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(21, "c")) },
+				// R
+				{ "RO", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(16, "c")) },
+				{ "RS", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(13, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				// S
+				{ "SA", new BBanStructure(BBanEntry.BankCode(2, "n"), BBanEntry.AccountNumber(18, "c")) },
+				{ "SC", new BBanStructure(BBanEntry.BankCode(6, "c"), BBanEntry.BranchCode(2, "n"), BBanEntry.AccountNumber(19, "c")) },
+				{ "SE", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(17, "n")) },
+				{ "SI", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(0, "n"), BBanEntry.AccountNumber(8, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "SK", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.AccountNumberPrefix(6, "n"), BBanEntry.AccountNumber(10, "n")) },
+				{ "SM", new BBanStructure(BBanEntry.NationalCheckDigit(1, "a"), BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(12, "c")) },
+				{ "ST", new BBanStructure(BBanEntry.BankCode(4, "n"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(11, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "SV", new BBanStructure(BBanEntry.BankCode(4, "a"), BBanEntry.AccountNumber(20, "n")) },				
+				// T
+				{ "TL", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(14, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				{ "TN", new BBanStructure(BBanEntry.BankCode(2, "n"), BBanEntry.BranchCode(3, "n"), BBanEntry.AccountNumber(15, "c")) },
+				{ "TR", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.NationalCheckDigit(1, "c"), BBanEntry.AccountNumber(16, "c")) },
+				// U
+				{ "UA", new BBanStructure(BBanEntry.BankCode(6, "n"), BBanEntry.AccountNumber(19, "n")) },
+				// V
+				{ "VA", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.AccountNumber(15, "n")) },
+				{ "VG", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(16, "n")) },				
+				// X
+				{ "XK", new BBanStructure(BBanEntry.BankCode(2, "n"), BBanEntry.BranchCode(2, "n"), BBanEntry.AccountNumber(10, "n"), BBanEntry.NationalCheckDigit(2, "n")) },
+				
+				// PARTIAL/EXPERIMENTAL Countries
+				{ "AO", new BBanStructure(BBanEntry.AccountNumber(21, "n")) }, // Andola
+				{ "BF", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n")) }, // Burkina Faso
+				{ "BJ", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n")) }, // Benin
+				{ "CF", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "n")) }, // Central African Republic
+				{ "CG", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "n")) }, // Congo
+				{ "CI", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n") ) }, // Ivory Coast (Cote Divoire)
+				{ "CM", new BBanStructure(BBanEntry.AccountNumber(23, "n")) }, // Cameroon
+				{ "CV", new BBanStructure(BBanEntry.AccountNumber(21, "n")) }, // Cape Verde
+				{ "DZ", new BBanStructure(BBanEntry.AccountNumber(22, "n")) }, // Algeria
+				{ "GA", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "c")) }, // Gabon
+				{ "GQ", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "n")) }, // Equatorial Guinea
+				{ "GW", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.BranchCode(4, "n"), BBanEntry.AccountNumber(13, "n")) }, // Guinea-Bissau
+				{ "HN", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(20, "n")) }, // Honduras
+				{ "IR", new BBanStructure(BBanEntry.AccountNumber(22, "n")) }, // Iran
+				{ "KM", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(13, "c")) }, // Comoros
+				{ "MA", new BBanStructure(BBanEntry.BankCode(3, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(16, "n")) }, // Morocco
+				{ "MG", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5, "n"), BBanEntry.AccountNumber(11, "c"), BBanEntry.NationalCheckDigit(2, "n")) }, // Madagascar
+				{ "ML", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n")) }, // Mali
+				{ "MN", new BBanStructure(BBanEntry.BankCode(2, "n"), BBanEntry.AccountNumber(14, "n")) }, // Mongolia
+				{ "MZ", new BBanStructure(BBanEntry.AccountNumber(21, "n")) }, // Mozambique
+				{ "NE", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n"))}, // Niger
+				{ "NI", new BBanStructure(BBanEntry.BankCode(4, "c"), BBanEntry.AccountNumber(24, "n")) }, // Nicaragua
+				{ "SN", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n")) }, // Senegal
+				{ "TD", new BBanStructure(BBanEntry.BankCode(5, "n"), BBanEntry.BranchCode(5,"n"), BBanEntry.AccountNumber(13, "n")) }, // Chad
+				{ "TG", new BBanStructure(BBanEntry.BankCode(2, "c"), BBanEntry.AccountNumber(22, "n")) }, // Togo
+			};
 		}
 
 		/// <summary>
@@ -478,7 +239,6 @@ namespace SinKien.IBAN4Net
 
 			return result;
 		}
-
 	}
 
 	/// <summary>
@@ -540,21 +300,13 @@ namespace SinKien.IBAN4Net
 		}
 
 		public static BBanEntry BankCode(int length, string characterType) => new BBanEntry(BBanEntryType.BANK_CODE, getCharacterType(characterType), length);
-
 		public static BBanEntry BranchCode(int length, string characterType) => new BBanEntry(BBanEntryType.BRANCH_CODE, getCharacterType(characterType), length);
-
 		public static BBanEntry AccountNumberPrefix(int length, string characterType) => new BBanEntry(BBanEntryType.ACCOUNT_NUMBER_PREFIX, getCharacterType(characterType), length);
-
 		public static BBanEntry AccountNumber(int length, string characterType) => new BBanEntry(BBanEntryType.ACCOUNT_NUMBER, getCharacterType(characterType), length);
-
 		public static BBanEntry NationalCheckDigit(int length, string characterType) => new BBanEntry(BBanEntryType.NATIONAL_CHECK_DIGIT, getCharacterType(characterType), length);
-
 		public static BBanEntry AccountType(int length, string characterType) => new BBanEntry(BBanEntryType.ACCOUNT_TYPE, getCharacterType(characterType), length);
-
 		public static BBanEntry OwnerAccountNumber(int length, string characterType) => new BBanEntry(BBanEntryType.OWNER_ACCOUNT_NUMBER, getCharacterType(characterType), length);
-
 		public static BBanEntry IdentificationNumber(int length, string characterType) => new BBanEntry(BBanEntryType.IDENTIFICATION_NUMBER, getCharacterType(characterType), length);
-
 		public static BBanEntry BalanceAccountNumber(int length, string characterType) => new BBanEntry(BBanEntryType.BALANCE_ACCOUNT_NUMBER, getCharacterType(characterType), length);
 
 		private static BBanEntryCharacterType getCharacterType(string character)
@@ -565,7 +317,6 @@ namespace SinKien.IBAN4Net
 			}
 
 			return (BBanEntryCharacterType)Enum.Parse(typeof(BBanEntryCharacterType), character, true);
-
 		}
 	}
 }
